@@ -78,7 +78,7 @@ $eventDescription = 'Join us for an exciting soccer match where the best teams c
     <div class="container">
         <h1 class="main-title">Event Details</h1>
         <div class="event-details">
-            <img src="soccer.jpg" alt="<?= $eventTitle ?>">
+            <img src="images/soccer.jpg" alt="<?= $eventTitle ?>">
             <h2><?= $eventTitle ?></h2>
 
             <p><strong>Organizer:</strong>Mama mo</p>

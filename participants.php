@@ -8,6 +8,7 @@ $participant1 = '<strong>John Doe</strong>';
 $participant2 = '<strong>Jane Smith</strong>';
 $participant3 = '<strong>Sam Wilson</strong>';
 $participant4 = '<strong>Emily Johnson</strong>';
+include 'navbar.php';
 ?>
 
 <!DOCTYPE html>
@@ -21,70 +22,6 @@ $participant4 = '<strong>Emily Johnson</strong>';
             margin: 0;
             height: 100vh;
             display: flex;
-        }
-
-        /* Creative navigation bar */
-        .navbar {
-            width: 260px;
-            background-color: #cfddf9;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            padding: 20px 10px;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            box-shadow: 3px 0 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar img {
-
-height: 140px; /* Adjust this value based on your logo's size */
-width: 140px; /* Maintain aspect ratio */
-margin-right: 20px; /* Space between logo and navigation links */
-margin-left: 60px;
-}
-
-        .navbar h2 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            font-weight: bold;
-            text-transform: uppercase;
-            text-align: center;
-            letter-spacing: 2px;
-        }
-
-        .navbar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            width: 100%;
-        }
-
-        .navbar li {
-            margin: 15px 0;
-            text-align: center;
-        }
-
-        .navbar a {
-            display: flex;
-            margin-left: 20px;
-            padding: 10px;
-            color: black;
-            font-size: 1rem;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .navbar a:hover {
-            background: #9bbcff;
-            transform: scale(1.05);
-        }
-
-        .navbar a i {
-            margin-right: 10px;
-            font-size: 1.2rem;
         }
 
         /* Page container */
@@ -154,20 +91,6 @@ margin-left: 60px;
 </head>
 
 <body>
-    <!-- Creative Navigation Bar -->
-    <div class="navbar">
-        <div>
-            <img src="logo.png">
-        </div>
-        <ul>
-            <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li><a href="events.php"><i class="fas fa-calendar"></i> Events</a></li>
-            <li><a href="participants.php"><i class="fas fa-users"></i> Participants</a></li>
-            <li><a href="profile.php"><i class="fas fa-user"></i> Profile</a></li>
-            <li><a href="settings.php"><i class="fas fa-cogs"></i> Settings</a></li>
-        </ul>
-    </div>
-
     <!-- Main Content -->
     <div class="container">
         <h1 class="main-title"><?= $pageTitle ?></h1>
@@ -175,19 +98,19 @@ margin-left: 60px;
         <div class="participant-grid">
             <div class="participant-card">
                 <h3><?= $participant1 ?></h3>
-                <img src="participant1.jpg" alt="John Doe">
+                <img src="images/participant1.jpg" alt="John Doe">
             </div>
             <div class="participant-card">
                 <h3><?= $participant2 ?></h3>
-                <img src="participant2.jpg" alt="Jane Smith">
+                <img src="images/participant2.jpg" alt="Jane Smith">
             </div>
             <div class="participant-card">
                 <h3><?= $participant3 ?></h3>
-                <img src="participant3.jpg" alt="Sam Wilson">
+                <img src="images/participant3.jpg" alt="Sam Wilson">
             </div>
             <div class="participant-card">
                 <h3><?= $participant4 ?></h3>
-                <img src="participant4.jpg" alt="Emily Johnson">
+                <img src="images/participant4.jpg" alt="Emily Johnson">
             </div>
         </div>
     </div>
