@@ -150,6 +150,8 @@ button:hover {
     </div>
 
     <!-- Login Button with redirection to dashboard.php -->
+     
+    <!-- Login Button with redirection to dashboard.php -->
     <button type="button" onclick="window.location.href='dashboard.php';">Login</button>
 </div>
 
