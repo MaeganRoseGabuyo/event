@@ -174,7 +174,7 @@ $pageTitle5 = 'EVENTS 2024';
     <!-- Creative Navigation Bar -->
     <div class="navbar">
         <div>
-            <img src="logo.png">
+            <img src="images/logo.png">
         </div>
         <ul>
             <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
@@ -200,38 +200,38 @@ $pageTitle5 = 'EVENTS 2024';
             <div class="event-card">
                 <a href="fullevent.php">
                     <h3><?= $title1 ?></h3>
-                    <img src="soccer.jpg" alt="Soccer">
+                    <img src="images/soccer.jpg" alt="Soccer">
                 </a>
             </div>
             <div class="event-card">
                 <a href="">
                     <h3><?= $title2 ?></h3>
-                    <img src="marathon.jpg" alt="Marathon">
+                    <img src="images/marathon.jpg" alt="Marathon">
                 </a>
             </div>
             <div class="event-card">
                 <a href="">
                     <h3><?= $title3 ?></h3>
-                    <img src="esports.jpg" alt="Esports">
+                    <img src="images/esports.jpg" alt="Esports">
                 </a>
             </div>
 
             <div class="event-card">
                 <a href="fullevent.php">
                     <h3><?= $title1 ?></h3>
-                    <img src="soccer.jpg" alt="Soccer">
+                    <img src="images/soccer.jpg" alt="Soccer">
                 </a>
             </div>
             <div class="event-card">
                 <a href="">
                     <h3><?= $title2 ?></h3>
-                    <img src="marathon.jpg" alt="Marathon">
+                    <img src="images/marathon.jpg" alt="Marathon">
                 </a>
             </div>
             <div class="event-card">
                 <a href="">
                     <h3><?= $title3 ?></h3>
-                    <img src="esports.jpg" alt="Esports">
+                    <img src="images/esports.jpg" alt="Esports">
                 </a>
             </div>
         </div>

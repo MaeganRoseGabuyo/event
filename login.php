@@ -5,7 +5,7 @@
     <style>
 body {
     font-family: Arial, sans-serif;
-    background-image: url('bg2.png');
+    background-image: url('images/bg2.png');
     background-repeat: no-repeat; /* Prevent the background image from repeating */
     background-size: cover; /* Make the background image cover the entire viewport */
     background-position: center; /* Center the background image */
@@ -134,19 +134,19 @@ button:hover {
 <body>
 <div class="login-container">
     <!-- User Image (on top of the container) -->
-    <img src="login.png" alt="Log In" class="login">
+    <img src="images/login.png" alt="Log In" class="login">
     <div class="login-container">
     <h1>Login</h1>
 
     <div class="input-container">
-        <img src="wuser.png" alt="User Icon" class="icon left-icon">
+        <img src="images/wuser.png" alt="User Icon" class="icon left-icon">
         <input type="text" name="username" id="username" required>
     </div>
 
     <div class="input-container">
-        <img src="wpassword.png" alt="Password Icon" class="icon left-icon">
+        <img src="images/wpassword.png" alt="Password Icon" class="icon left-icon">
         <input type="password" name="password" id="password" required>
-        <img src="eye.png" alt="Right Icon" class="icon right-icon">
+        <img src="images/eye.png" alt="Right Icon" class="icon right-icon">
     </div>
 
     <!-- Login Button with redirection to dashboard.php -->

@@ -128,7 +128,7 @@ input[type="number"], select {
 <div class="container">
     <!-- Logo at the top of the header -->
     <div class="logo-container">
-        <img src="addlogo.png" alt="Logo" class="logo">
+        <img src="images/addlogo.png" alt="Logo" class="logo">
     </div>
     
     <!-- Header Section -->

@@ -204,7 +204,7 @@ margin-left: 60px;
 <body>
 <div class="navbar">
         <div>
-            <img src="logo.png">
+            <img src="images/logo.png">
         </div>
         <ul>
             <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
