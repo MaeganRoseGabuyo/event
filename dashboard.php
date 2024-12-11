@@ -12,10 +12,10 @@ $title = 'Dashboard';
     <title><?= $title ?></title>
    
     <style>
-        /* Dashboard specific styles */
+        
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f7fc; /* Light grayish blue */
+            background-color: #ffeaef;
             margin: 0;
             padding: 0;
             display: flex;
@@ -23,21 +23,21 @@ $title = 'Dashboard';
             overflow: hidden;
         }
 
-        /* Main container for dashboard */
+
         .container {
             display: flex;
             flex: 1;
-            margin-left: 280px; /* Space for sidebar */
+            margin-left: 280px; 
             flex-direction: column;
             padding: 20px;
             height: 100%;
             overflow: auto;
         }
 
-        /* Sidebar navigation */
+   
         .navbar {
         width: 260px;
-        background-color: #cfddf9;
+        background-color: #7a001b;
         color: #ffffff;
         display: flex;
         flex-direction: column;
@@ -45,14 +45,16 @@ $title = 'Dashboard';
         position: fixed;
         top: 0;
         bottom: 0;
-        box-shadow: 3px 0 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+
+
     }
     .navbar img {
 
-height: 140px; /* Adjust this value based on your logo's size */
-width: 140px; /* Maintain aspect ratio */
-margin-right: 20px; /* Space between logo and navigation links */
-margin-left: 60px;
+height: 150px; 
+width: 150px; 
+margin-right: 20px; 
+margin-left: 50px;
 }
 
     .navbar h2 {
@@ -86,7 +88,7 @@ margin-left: 60px;
     }
 
     .navbar a:hover {
-        background: #9bbcff;
+        background: #fc0038;
         transform: scale(1.05);
     }
 
@@ -157,7 +159,7 @@ margin-left: 60px;
 
         .stats .stat-card h2 {
             font-size: 2rem;
-            color: #1e3a8a;
+            color: #79001b;
         }
 
         .stats .stat-card p {
@@ -190,7 +192,7 @@ margin-left: 60px;
         }
 
         footer {
-            background-color: #3b82f6;
+            background-color: #39000c;
             color: #fff;
             padding: 2px;
             text-align: center;
@@ -204,7 +206,7 @@ margin-left: 60px;
 <body>
 <div class="navbar">
         <div>
-            <img src="logo.png">
+            <img src="images/redlogo.png">
         </div>
         <ul>
             <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
