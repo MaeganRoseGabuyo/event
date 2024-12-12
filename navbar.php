@@ -34,7 +34,6 @@
         text-transform: uppercase;
         text-align: center;
         letter-spacing: 2px;
-
     }
     .navbar ul {
         list-style: none;
@@ -42,7 +41,6 @@
         margin: 0;
         width: 100%;
     }
-
     .navbar li {
         margin: 15px 0;
         text-align: center;

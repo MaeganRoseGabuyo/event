@@ -103,19 +103,19 @@ body {
         <div class="participant-grid">
             <div class="participant-card">
                 <h3><?= $participant1 ?></h3>
-                <img src="participant1.jpg" alt="John Doe">
+                <img src="images/participant1.jpg" alt="John Doe">
             </div>
             <div class="participant-card">
                 <h3><?= $participant2 ?></h3>
-                <img src="participant2.jpg" alt="Jane Smith">
+                <img src="images/participant2.jpg" alt="Jane Smith">
             </div>
             <div class="participant-card">
                 <h3><?= $participant3 ?></h3>
-                <img src="participant3.jpg" alt="Sam Wilson">
+                <img src="images/participant3.jpg" alt="Sam Wilson">
             </div>
             <div class="participant-card">
                 <h3><?= $participant4 ?></h3>
-                <img src="participant4.jpg" alt="Emily Johnson">
+                <img src="images/participant4.jpg" alt="Emily Johnson">
             </div>
         </div>
     </div>

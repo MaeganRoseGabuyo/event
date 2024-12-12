@@ -7,7 +7,6 @@ $title2 = '<strong>Race to Victory</strong>';
 $title3 = '<strong>Esports Clash </strong>';
 
 $pageTitle5 = 'EVENTS 2024';
-
 include 'navbar.php';
 ?>
 
