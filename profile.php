@@ -1,5 +1,8 @@
-<?php include 'navbar.php';
+<?php
+include 'navbar.php';
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +17,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ebf8ff;
+            background-color:  #f1ee8e;
         }
 
        
@@ -82,26 +85,32 @@
             background-color: #0056b3;
         }
 
+        
+   
+
     /* Page container */
     .container {
         margin-left: 450px; /* Space for the navigation bar */
         padding: 16px;
         flex: 1;
     }
-        /* Footer */
-        footer {
-        background-color: #3b82f6; /* Matches Tailwind's bg-blue-500 */
-        color: #ffffff;
-        text-align: center;
-        padding: 2px;
-        position: fixed;
-        bottom: 0;
-        left: 280px; /* Align with container */
-        width: calc(100% - 280px);
-    }
+
     </style>
 </head>
 <body>
+<div class="navbar">
+        <div>
+            <img src="images/ylogo.png">
+        </div>
+        <ul>
+            <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="events.php"><i class="fas fa-calendar"></i> Events</a></li>
+            <li><a href="participants.php"><i class="fas fa-users"></i> Participants</a></li>
+            <li><a href="profile.php"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="settings.php"><i class="fas fa-cogs"></i> Settings</a></li>
+        </ul>
+    </div>
+
     <!-- Main Content -->
     <div class="container">
         <h1 class="main-title">Profile</h1>
@@ -112,10 +121,11 @@
             <h2>Paul Garren Santiago</h2>
             <p>Email: falllyyy@example.com</p>
             <p>Phone: +123456789</p>
-            <p>Bio: Passionate about coding and event management. Always looking for opportunities to improve my skills and collaborate with others.</p>
+            <p><i><strong>Bio: Passionate about coding and event management.
+            Always looking for opportunities to improve my skills and collaborate with others.</strong></i></p>
 
             <!-- Edit Profile Button -->
-            <a href="edit_profile.php" class="edit-profile-btn">Edit Profile</a>
+            <a href="editprofile.php" class="edit-profile-btn">Edit Profile</a>
         </div>
     </div>
 

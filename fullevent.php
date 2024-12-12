@@ -36,7 +36,7 @@ $event = $stmt->fetch();
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #ebf8ff; /* Matches bg-blue-100 */
+            background-color:  #f1ee8e;
             margin: 0;
             padding-bottom: 20px;
             display: flex;
@@ -53,7 +53,7 @@ $event = $stmt->fetch();
         .main-title {
             text-align: center;
             font-size: 2.5rem;
-            color: #1e3a8a; /* text-blue-900 */
+            color: #e6b400; /* text-blue-900 */
             font-weight: 600;
             margin: 2rem 0;
         }
@@ -75,7 +75,7 @@ $event = $stmt->fetch();
 
         .event-details h2 {
             font-size: 1.75rem;
-            color: #1e3a8a;
+            color: #e6b400;
             margin-bottom: 1rem;
         }
 
@@ -86,11 +86,13 @@ $event = $stmt->fetch();
         }
 
         footer {
-            background-color: #3b82f6;
-            color: #ffffff;
-            text-align: center;
-            padding: 2px;
-            margin-top: auto;
+        background-color: #e69b00;
+        color: #fff;
+        padding: 2px;
+        text-align: center;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
         }
     </style>
 </head>

@@ -5,37 +5,27 @@
     <style>
 body {
     font-family: Arial, sans-serif;
-    background-image: url('images/bg2.png');
+    background-image: url('images/yellowbg.png');
     background-repeat: no-repeat; /* Prevent the background image from repeating */
     background-size: cover; /* Make the background image cover the entire viewport */
     background-position: center; /* Center the background image */
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 100vh;
     margin: 0;
 }
 
 
 .login-container {
-    margin-left: 30px;;
+    background-color: rgba(255, 255, 255, 0.2); /* White with 80% opacity */
     padding: 20px;
     width: 400px;
     text-align: center;
     justify-content: center;
+    border-radius: 30px;
 }
 
-/* Right container with poster */
-.poster-container {
-    flex-grow: 1; /* Take the remaining width */
-    background-size: contain; /* Make the image smaller but still cover the div */
-    background-position: auto; /* Center the image */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-    height: 100vh; /* Ensure the poster container takes up the full height of the viewport */
-    width: 60%; /* Ensure the width fills the available space */
-    display: flex;
-margin-left: 140px;
-    align-items: center;
-}
 
 
 
@@ -68,7 +58,7 @@ label {
     position: relative;
     width: 70%;
     margin: 0 auto 15px auto;
-    margin-left: 30px;;
+    margin-left: 30px;
 }
 
 .input-container .icon {
@@ -101,7 +91,7 @@ label {
 button {
     width: 80%;
     padding: 10px;
-    background-color: #094a6b;
+    background-color: #e47200;
     border: none;
     border-radius: 20px;
     color: #fff;
@@ -111,7 +101,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #e6b400;
 }
 
 
@@ -135,7 +125,7 @@ button:hover {
 <div class="login-container">
     <!-- User Image (on top of the container) -->
     <img src="images/login.png" alt="Log In" class="login">
-    <div class="login-container">
+    <div class="login a-container">
     <h1>Login</h1>
 
     <div class="input-container">
@@ -159,11 +149,6 @@ button:hover {
     </form>
 </div>
 
-<div class="poster-container">
-        <div class="poster-content">
-
-        </div>
-    </div>
 
 
 </body>

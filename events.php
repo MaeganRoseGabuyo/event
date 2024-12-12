@@ -27,15 +27,16 @@ include 'navbar.php';
 <html lang="en">
 <head>
 <style>
-    /* General body styling */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #ebf8ff; 
-        margin: 0;
-        height: 100vh;
-        display: flex;
-    }
 
+body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f1ee8e;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
     /* Page container */
     .container {
         margin-left: 280px; /* Space for the navigation bar */
@@ -47,7 +48,7 @@ include 'navbar.php';
     .main-title {
         text-align: center;
         font-size: 3rem; /* Equivalent to text-6xl */
-        color: #1e3a8a;
+        color: #e6b400;
         font-weight: 600;
         margin-top: 1rem;
     }
@@ -88,15 +89,14 @@ include 'navbar.php';
 
     /* Footer styling */
     footer {
-        background-color: #3b82f6; /* Matches Tailwind's bg-blue-500 */
-        color: #ffffff;
-        text-align: center;
-        padding: 2px;
-        position: fixed;
-        bottom: 0;
-        left: 280px; /* Align with container */
-        width: calc(100% - 280px);
-    }
+            background-color: #e69b00;
+            color: #fff;
+            padding: 2px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
 
     .my-button {
     padding: 10px 20px;
@@ -123,6 +123,18 @@ include 'navbar.php';
 </head>
 
 <body>
+<div class="navbar">
+        <div>
+            <img src="images/ylogo.png">
+        </div>
+        <ul>
+            <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="events.php"><i class="fas fa-calendar"></i> Events</a></li>
+            <li><a href="participants.php"><i class="fas fa-users"></i> Participants</a></li>
+            <li><a href="profile.php"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="settings.php"><i class="fas fa-cogs"></i> Settings</a></li>
+        </ul>
+    </div>
 
     <!-- Main Content -->
     <div class="container">

@@ -1,83 +1,145 @@
-<?php
-// Get user ID from URL
-$user_id = $_GET['user_id'];
-
-// Example database connection
-include('db_connection.php');
-
-// Fetch user data for editing
-$query = "SELECT * FROM users WHERE user_id = $user_id";
-$result = mysqli_query($conn, $query);
-
-if (mysqli_num_rows($result) > 0) {
-    $user = mysqli_fetch_assoc($result);
-} else {
-    $user = null;
-}
-
-// Process form submission to update user info
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Get the updated data from the form
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $bio = $_POST['bio'];
-    $profile_picture = $_POST['profile_picture']; // For simplicity, assuming it's a text input
-
-    // Update the user's profile in the database
-    $update_query = "UPDATE users SET name = '$name', email = '$email', phone = '$phone', bio = '$bio', profile_picture = '$profile_picture' WHERE user_id = $user_id";
-    if (mysqli_query($conn, $update_query)) {
-        // Redirect to profile page after update
-        header("Location: profile.php?user_id=$user_id");
-        exit();
-    } else {
-        $error_message = "Failed to update profile.";
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile</title>
+    <title>Settings Page</title>
     <style>
-        /* Add styles for the form */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .settings-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .settings-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .settings-section {
+            margin-bottom: 30px;
+        }
+
+        .settings-section h3 {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .settings-section label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .settings-section input,
+        .settings-section select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .settings-section input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .settings-buttons {
+            text-align: center;
+        }
+
+        .settings-buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 0 10px;
+        }
+
+        .save-button {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        .save-button:hover {
+            background-color: #45a049;
+        }
+
+        .cancel-button {
+            background-color: #f44336;
+            color: #fff;
+        }
+
+        .cancel-button:hover {
+            background-color: #d32f2f;
+        }
     </style>
 </head>
 <body>
-    <!-- Same Navbar -->
+    <div class="settings-container">
+        <h2>Settings</h2>
 
-    <div class="container">
-        <h1>Edit Profile</h1>
-        
-        <?php if ($user): ?>
-        <form method="POST">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" value="<?= htmlspecialchars($user['name']) ?>" required>
+        <!-- Account Settings Section -->
+        <div class="settings-section">
+            <h3>Account Settings</h3>
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter your username">
 
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" required>
+            <input type="email" id="email" placeholder="Enter your email">
+        </div>
 
-            <label for="phone">Phone</label>
-            <input type="text" id="phone" name="phone" value="<?= htmlspecialchars($user['phone']) ?>" required>
+        <!-- Preferences Section -->
+        <div class="settings-section">
+            <h3>Preferences</h3>
+            <label for="language">Language</label>
+            <select id="language">
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="jp">Japanese</option>
+            </select>
 
-            <label for="bio">Bio</label>
-            <textarea id="bio" name="bio"><?= htmlspecialchars($user['bio']) ?></textarea>
+            <label for="theme">Theme</label>
+            <select id="theme">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </div>
 
-            <label for="profile_picture">Profile Picture URL</label>
-            <input type="text" id="profile_picture" name="profile_picture" value="<?= htmlspecialchars($user['profile_picture']) ?>">
+        <!-- Notification Settings Section -->
+        <div class="settings-section">
+            <h3>Notification Settings</h3>
+            <label>
+                <input type="checkbox" id="email-notifications">
+                Receive email notifications
+            </label>
+            <label>
+                <input type="checkbox" id="sms-notifications">
+                Receive SMS notifications
+            </label>
+        </div>
 
-            <button type="submit">Update Profile</button>
-        </form>
-        <?php else: ?>
-        <p>User not found.</p>
-        <?php endif; ?>
+        <!-- Buttons -->
+        <div class="settings-buttons">
+            <button class="save-button" type="submit">Save Changes</button>
+            <button class="cancel-button" type="button"  onclick="window.location.href='dashboard.php'">Cancel</button>
+        </div>
     </div>
-
-    <footer>
-        <p>&copy; Bounty Coders 2024. All rights reserved.</p>
-    </footer>
 </body>
 </html>

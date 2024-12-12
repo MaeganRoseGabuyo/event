@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_event'])){
     /* Basic Styles */
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #ebf8ff;
+    background-color:  #f1ee8e;
     margin: 0;
     padding: 0;
 }
