@@ -2,6 +2,7 @@
 // Dashboard page PHP setup
 include('database.php');
 
+
 //Prepare a SELECT statement
 $stmt = $pdo->prepare(query: 'SELECT * FROM events');
 
@@ -43,40 +44,6 @@ include 'navbar.php';
             padding: 20px;
             height: 100%;
             overflow: auto;
-        }
-
-        .sidebar .logo {
-            text-align: center;
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            color: #fff;
-        }
-
-        .sidebar ul {
-            padding: 0;
-            list-style-type: none;
-        }
-
-        .sidebar ul li {
-            margin-bottom: 20px;
-        }
-
-        .sidebar ul li a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 1.1rem;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            transition: 0.3s;
-        }
-
-        .sidebar ul li a:hover {
-            background-color: #3b82f6;
-        }
-
-        .sidebar ul li a i {
-            margin-right: 15px;
         }
 
         /* Main content styling */
@@ -139,24 +106,19 @@ include 'navbar.php';
             color: #555;
         }
 
-
+        footer {
+            background-color: #e69b00;
+            color: #fff;
+            padding: 2px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
     </style>
 </head>
 
 <body>
-<div class="navbar">
-        <div>
-            <img src="images/ylogo.png">
-        </div>
-        <ul>
-            <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li><a href="events.php"><i class="fas fa-calendar"></i> Events</a></li>
-            <li><a href="participants.php"><i class="fas fa-users"></i> Participants</a></li>
-            <li><a href="profile.php"><i class="fas fa-user"></i> Profile</a></li>
-            <li><a href="settings.php"><i class="fas fa-cogs"></i> Settings</a></li>
-        </ul>
-    </div>
-
     <div class="container">
         <!-- Welcome message -->
         <h1>Welcome to your BCEMS Dashboard!</h1>

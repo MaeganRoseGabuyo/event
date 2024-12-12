@@ -1,12 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<body>
-    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <style>
-
-
-    .navbar {
+        .navbar {
         width: 260px;
         background-color: #F4730B;
         color: #ffffff;
@@ -67,18 +66,21 @@
         font-size: 1.2rem;
     }
 
-    footer {
-        background-color: #e69b00;
-        color: #fff;
-        padding: 2px;
-        text-align: center;
-        position: fixed;
-        width: 100%;
-        bottom: 0;
-        }
-
     </style>
-
-    
+    </style>
+</head>
+<body>
+<div class="navbar">
+        <div>
+            <img src="images/ylogo.png">
+        </div>
+        <ul>
+            <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="events.php"><i class="fas fa-calendar"></i> Events</a></li>
+            <li><a href="participants.php"><i class="fas fa-users"></i> Participants</a></li>
+            <li><a href="profile.php"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="settings.php"><i class="fas fa-cogs"></i> Settings</a></li>
+        </ul>
+    </div>
 </body>
 </html>

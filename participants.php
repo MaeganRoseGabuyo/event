@@ -1,4 +1,7 @@
 <?php
+include 'navbar.php';
+include 'footer.php';
+
 // Your PHP variables for the participant page
 $title = 'Participants';
 
@@ -10,7 +13,6 @@ $participant3 = '<strong>Sam Wilson</strong>';
 $participant4 = '<strong>Emily Johnson</strong>';
 
 
-include 'navbar.php';
 ?>
 
 <!DOCTYPE html>
@@ -119,9 +121,5 @@ body {
             </div>
         </div>
     </div>
-
-    <footer>
-        <p>&copy; Bounty Coders 2024. All rights reserved.</p>
-    </footer>
 </body>
 </html>
