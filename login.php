@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +15,6 @@ body {
     margin: 0;
 }
 
-
 .login-container {
     background-color: rgba(255, 255, 255, 0.2); /* White with 80% opacity */
     padding: 20px;
@@ -25,9 +23,6 @@ body {
     justify-content: center;
     border-radius: 30px;
 }
-
-
-
 
 .user-image {
     width: 100px;
