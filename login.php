@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <style>
 body {
@@ -25,9 +25,6 @@ body {
     justify-content: center;
     border-radius: 30px;
 }
-
-
-
 
 .user-image {
     width: 100px;
@@ -63,7 +60,7 @@ label {
 
 .input-container .icon {
     position: absolute;
-    top: 48%;
+    top: 60%;
     transform: translateY(-50%);
     width: 24px; /* Adjust icon size */
     height: 24px;
@@ -77,7 +74,6 @@ label {
 
     right: -40px; /* Position the right icon to the right */
 }
-
 
 .input-container input {
     width: 100%;
@@ -104,7 +100,6 @@ button:hover {
     background-color: #e6b400;
 }
 
-
 .success {
     color: green;
     margin: 10px 0;
@@ -115,13 +110,68 @@ button:hover {
     margin: 10px 0;
 }
 
+.additional-options {
+    margin-top: 10px;
+    font-size: 14px;
+    color: white;
+}
+
+.additional-options a {
+    color:black;
+    text-decoration: none;
+}
+
+.additional-options a:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+.remember-me {
+    display: flex;
+    margin-top: -15px;
+    margin-left: 30px;
+    gap: 5px;
+    color: white;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+.icon {
+    color: white; /* Makes the icons white */
+    cursor: pointer;
+}
+.left-icon {
+    pointer-events: none; /* Prevent the icon from being clickable */
+    color: white;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.right-icon {
+    cursor: pointer; /* Ensure the eye icon is clickable */
+    color: white;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    
+
+
+    
 </head>
 <body>
+
 <div class="login-container">
     <!-- User Image (on top of the container) -->
     <img src="images/login.png" alt="Log In" class="login">
@@ -129,27 +179,50 @@ button:hover {
     <h1>Login</h1>
 
     <div class="input-container">
-        <img src="images/wuser.png" alt="User Icon" class="icon left-icon">
-        <input type="text" name="username" id="username" required>
+    <i class="fas fa-user icon left-icon"></i>
+    <input type="text" name="username" id="username" placeholder="Username" required>
+</div>
+
+<div class="input-container">
+    <i class="fas fa-lock icon left-icon"></i>
+    <input type="password" name="password" id="password" placeholder="Password" required>
+    <i class="fas fa-eye icon right-icon" id="toggle-password"></i>
+</div>
+
+
+    <div class="remember-me">
+        <input type="checkbox" id="remember-me">
+        <label for="remember-me"><i>Remember Me</i></label>
     </div>
 
-    <div class="input-container">
-        <img src="images/wpassword.png" alt="Password Icon" class="icon left-icon">
-        <input type="password" name="password" id="password" required>
-        <img src="images/eye.png" alt="Right Icon" class="icon right-icon">
-    </div>
-
-    <!-- Login Button with redirection to dashboard.php -->
-     
-    <!-- Login Button with redirection to dashboard.php -->
     <button type="button" onclick="window.location.href='dashboard.php';">Login</button>
+
+    <div class="additional-options">
+        <a href="forgetpass.php">Forgot Password?</a>
+    </div>
+</div>
 </div>
 
+<script>
+const togglePassword = document.getElementById('toggle-password');
+const passwordInput = document.getElementById('password');
 
-    </form>
-</div>
+togglePassword.addEventListener('click', () => {
+    // Toggle the input type between 'password' and 'text'
+    const currentType = passwordInput.getAttribute('type');
+    if (currentType === 'password') {
+        passwordInput.setAttribute('type', 'text');
+        togglePassword.classList.remove('fa-eye');
+        togglePassword.classList.add('fa-eye-slash');
+    } else {
+        passwordInput.setAttribute('type', 'password');
+        togglePassword.classList.remove('fa-eye-slash');
+        togglePassword.classList.add('fa-eye');
+    }
+});
 
-
-
+</script>
 </body>
+
+
 </html>

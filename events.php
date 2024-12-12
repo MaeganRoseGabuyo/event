@@ -85,7 +85,7 @@ body {
     .my-button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color:#3b82f6;
+    background-color: #e47200;
     color: white;
     border: none;
     border-radius: 5px;
@@ -94,7 +94,7 @@ body {
 }
 
 .my-button:hover {
-    background-color: #9bbcff;
+    background-color: #e6b400;
 }
 
 </style>
@@ -114,7 +114,6 @@ body {
         <ul>
             <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
             <li><a href="events.php"><i class="fas fa-calendar"></i> Events</a></li>
-            <li><a href="participants.php"><i class="fas fa-users"></i> Participants</a></li>
             <li><a href="profile.php"><i class="fas fa-user"></i> Profile</a></li>
             <li><a href="settings.php"><i class="fas fa-cogs"></i> Settings</a></li>
         </ul>
