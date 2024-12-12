@@ -12,7 +12,7 @@
     /* Basic Styles */
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #ebf8ff;
+    background-color:  #f1ee8e;
     margin: 0;
     padding: 0;
 }
@@ -128,7 +128,7 @@ input[type="number"], select {
 <div class="container">
     <!-- Logo at the top of the header -->
     <div class="logo-container">
-        <img src="addlogo.png" alt="Logo" class="logo">
+        <img src="images/addlogo.png" alt="Logo" class="logo">
     </div>
     
     <!-- Header Section -->

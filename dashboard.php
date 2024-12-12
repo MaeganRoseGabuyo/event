@@ -1,6 +1,7 @@
 <?php
 // Dashboard page PHP setup
 $title = 'Dashboard';
+include 'navbar.php';
 ?>
 
 <!DOCTYPE html>
@@ -14,15 +15,14 @@ $title = 'Dashboard';
     <style>
         
         body {
-            font-family: Arial, sans-serif;
-            background-color: #ffeaef;
+            font-family: 'Arial', sans-serif;
+            background-color: #f1ee8e;
             margin: 0;
             padding: 0;
             display: flex;
             height: 100vh;
             overflow: hidden;
         }
-
 
         .container {
             display: flex;
@@ -33,69 +33,6 @@ $title = 'Dashboard';
             height: 100%;
             overflow: auto;
         }
-
-   
-        .navbar {
-        width: 260px;
-        background-color: #7a001b;
-        color: #ffffff;
-        display: flex;
-        flex-direction: column;
-        padding: 20px 10px;
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-
-
-    }
-    .navbar img {
-
-height: 150px; 
-width: 150px; 
-margin-right: 20px; 
-margin-left: 50px;
-}
-
-    .navbar h2 {
-        font-size: 1.8rem;
-        margin-bottom: 20px;
-        font-weight: bold;
-        text-transform: uppercase;
-        text-align: center;
-        letter-spacing: 2px;
-    }
-    .navbar ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        width: 100%;
-    }
-    .navbar li {
-        margin: 15px 0;
-        text-align: center;
-    }
-
-    .navbar a {
-        display: flex;
-        margin-left: 20px;
-        padding: 10px;
-        color: black;
-        font-size: 1rem;
-        text-decoration: none;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-    }
-
-    .navbar a:hover {
-        background: #fc0038;
-        transform: scale(1.05);
-    }
-
-    .navbar a i {
-        margin-right: 10px;
-        font-size: 1.2rem;
-    }
 
         .sidebar .logo {
             text-align: center;
@@ -159,7 +96,7 @@ margin-left: 50px;
 
         .stats .stat-card h2 {
             font-size: 2rem;
-            color: #79001b;
+            color: #e6b400;
         }
 
         .stats .stat-card p {
@@ -191,22 +128,14 @@ margin-left: 50px;
             color: #555;
         }
 
-        footer {
-            background-color: #39000c;
-            color: #fff;
-            padding: 2px;
-            text-align: center;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
+
     </style>
 </head>
 
 <body>
 <div class="navbar">
         <div>
-            <img src="images/redlogo.png">
+            <img src="images/ylogo.png">
         </div>
         <ul>
             <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
@@ -257,7 +186,7 @@ margin-left: 50px;
     </div>
 
     <footer>
-        <p>&copy; EventManager 2024. All rights reserved.</p>
+    <p>&copy; Bounty Coders 2024. All rights reserved.</p>
     </footer>
 </body>
 </html>

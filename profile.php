@@ -1,3 +1,8 @@
+<?php
+include 'navbar.php';
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +17,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ebf8ff;
+            background-color:  #f1ee8e;
         }
 
        
@@ -81,69 +86,7 @@
         }
 
         
-    /* Creative navigation bar */
-    .navbar {
-        width: 260px;
-        background-color: #cfddf9;
-        color: #ffffff;
-        display: flex;
-        flex-direction: column;
-        padding: 20px 10px;
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        box-shadow: 3px 0 6px rgba(0, 0, 0, 0.1);
-    }
-    .navbar img {
-
-    height: 140px; /* Adjust this value based on your logo's size */
-    width: 140px; /* Maintain aspect ratio */
-    margin-right: 20px; /* Space between logo and navigation links */
-    margin-left: 60px;
-}
-
-
-    .navbar h2 {
-        font-size: 1.8rem;
-        margin-bottom: 20px;
-        font-weight: bold;
-        text-transform: uppercase;
-        text-align: center;
-        letter-spacing: 2px;
-    }
-
-    .navbar ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        width: 100%;
-    }
-
-    .navbar li {
-        margin: 15px 0;
-        text-align: center;
-    }
-
-    .navbar a {
-        display: flex;
-        margin-left: 20px;
-        padding: 10px;
-        color: black;
-        font-size: 1rem;
-        text-decoration: none;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-    }
-
-    .navbar a:hover {
-        background: #9bbcff;
-        transform: scale(1.05);
-    }
-
-    .navbar a i {
-        margin-right: 10px;
-        font-size: 1.2rem;
-    }
+   
 
     /* Page container */
     .container {
@@ -151,24 +94,13 @@
         padding: 16px;
         flex: 1;
     }
-        /* Footer */
-        footer {
-        background-color: #3b82f6; /* Matches Tailwind's bg-blue-500 */
-        color: #ffffff;
-        text-align: center;
-        padding: 2px;
-        position: fixed;
-        bottom: 0;
-        left: 280px; /* Align with container */
-        width: calc(100% - 280px);
-    }
+
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <div class="navbar">
+<div class="navbar">
         <div>
-            <img src="logo.png">
+            <img src="images/ylogo.png">
         </div>
         <ul>
             <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
@@ -185,14 +117,15 @@
 
         <!-- Profile Card (UI only, no database) -->
         <div class="profile-card">
-            <img src="user.jpg" alt="User's Profile Picture" class="profile-img">
+            <img src="images/user.jpg" alt="User's Profile Picture" class="profile-img">
             <h2>Paul Garren Santiago</h2>
             <p>Email: falllyyy@example.com</p>
             <p>Phone: +123456789</p>
-            <p>Bio: Passionate about coding and event management. Always looking for opportunities to improve my skills and collaborate with others.</p>
+            <p><i><strong>Bio: Passionate about coding and event management.
+            Always looking for opportunities to improve my skills and collaborate with others.</strong></i></p>
 
             <!-- Edit Profile Button -->
-            <a href="edit_profile.php" class="edit-profile-btn">Edit Profile</a>
+            <a href="editprofile.php" class="edit-profile-btn">Edit Profile</a>
         </div>
     </div>
 
