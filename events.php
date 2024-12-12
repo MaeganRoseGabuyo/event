@@ -1,4 +1,17 @@
 <?php
+include('database.php');
+
+//Prepare a SELECT statement
+$stmt = $pdo->prepare(query: 'SELECT * FROM events');
+
+//Execute the statement
+$stmt->execute();
+
+//Fetch the result
+$events = $stmt->fetchAll();
+
+/*  var_dump($events); */
+
 // Your PHP variables remain unchanged
 $title = 'Events';
 
@@ -55,6 +68,9 @@ include 'navbar.php';
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         transition: transform 0.3s, box-shadow 0.3s;
         text-align: center;
+    }
+    .event-card a{
+        text-decoration: none;
     }
 
     .event-card:hover {
@@ -120,43 +136,14 @@ include 'navbar.php';
 
 
         <div class="event-grid">
-            <div class="event-card">
-                <a href="fullevent.php">
-                    <h3><?= $title1 ?></h3>
-                    <img src="images/soccer.jpg" alt="Soccer">
-                </a>
-            </div>
-            <div class="event-card">
-                <a href="">
-                    <h3><?= $title2 ?></h3>
-                    <img src="images/marathon.jpg" alt="Marathon">
-                </a>
-            </div>
-            <div class="event-card">
-                <a href="">
-                    <h3><?= $title3 ?></h3>
-                    <img src="images/esports.jpg" alt="Esports">
-                </a>
-            </div>
-
-            <div class="event-card">
-                <a href="fullevent.php">
-                    <h3><?= $title1 ?></h3>
-                    <img src="images/soccer.jpg" alt="Soccer">
-                </a>
-            </div>
-            <div class="event-card">
-                <a href="">
-                    <h3><?= $title2 ?></h3>
-                    <img src="images/marathon.jpg" alt="Marathon">
-                </a>
-            </div>
-            <div class="event-card">
-                <a href="">
-                    <h3><?= $title3 ?></h3>
-                    <img src="images/esports.jpg" alt="Esports">
-                </a>
-            </div>
+            <?php foreach($events as $event):?>
+                <div class="event-card">
+                    <a href="fullevent.php?id=<?=$event['id']?>">
+                        <h3><?=$event['event']?></h3>
+                        <img src="<?=$event['grid_image']?>" alt="Soccer">
+                    </a>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
 

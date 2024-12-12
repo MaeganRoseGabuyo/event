@@ -1,5 +1,16 @@
 <?php
 // Dashboard page PHP setup
+include('database.php');
+
+//Prepare a SELECT statement
+$stmt = $pdo->prepare(query: 'SELECT * FROM events');
+
+//Execute the statement
+$stmt->execute();
+
+//Fetch the result
+$events = $stmt->fetchAll();
+
 $title = 'Dashboard';
 include 'navbar.php';
 ?>
@@ -116,7 +127,17 @@ include 'navbar.php';
         <!-- Stats section -->
         <div class="stats">
             <div class="stat-card">
-                <h2>20</h2>
+                <h2><?php
+                        $dash_totalEvents_query = "SELECT * FROM events";
+                        $dash_totalEvents_query_run = mysqli_query($con, $dash_totalEvents_query);
+                        if($totalEvents = mysqli_num_rows($dash_totalEvents_query_run))
+                        {
+                            echo $totalEvents;
+                        }
+                        else{
+                            echo '<p>No data<p/>';
+                        }  
+                        ?></td></h2>
                 <p>Total Events</p>
             </div>
             <div class="stat-card">
