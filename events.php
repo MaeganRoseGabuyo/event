@@ -60,32 +60,42 @@ $pageTitle5 = 'EVENTS 2024';
         }
 
         .event-card {
-            background-color: #ffffff;
-            padding: 12px;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-align: center;
-        }
+                background-color: #ffffff;
+                padding: 12px;
+                border-radius: 0.5rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s, box-shadow 0.3s;
+                text-align: center;
+                display: flex;  /* Use Flexbox */
+                flex-direction: column;  /* Stack items vertically */
+                justify-content: space-between;  /* Space between content and button */
+                height: 100%;
+         }
 
         .event-card a {
-            text-decoration: none;
-            color: #e6b400;
+                text-decoration: none;
+                color: #e6b400;
         }
 
         .event-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15);
+                transform: translateY(-5px);
+                box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15);
         }
 
         .event-card img {
-            width: 100%; /* Ensures the image stretches to fit the container */
-            height: 300px; /* Maintains the image's aspect ratio */
-            object-fit: cover; /* Ensures the entire image is visible */
-            border-radius: 8px;
-            margin-bottom: 1rem;
-        }
+                width: 100%;
+                height: 300px;
+                object-fit: cover;
+                border-radius: 8px;
+                margin-bottom: 1rem;
+         }
 
+        .edit-button-container {
+                margin-top: auto; /* Push the button to the bottom of the card */
+                display: flex;
+                justify-content: center;  /* Center the button horizontally */
+                margin-bottom: 10px;  /* Add some space below the button */
+        }
         .my-button {
             padding: 10px 20px;
             font-size: 16px;
@@ -100,6 +110,7 @@ $pageTitle5 = 'EVENTS 2024';
         .my-button:hover {
             background-color: #9bbcff;
         }
+
     </style>
 </head>
 <body>
@@ -117,9 +128,15 @@ $pageTitle5 = 'EVENTS 2024';
             <?php foreach($events as $event): ?>
                 <div class="event-card">
                     <a href="fullevent.php?id=<?= $event['id'] ?>">
-                        <h3><?= htmlspecialchars($event['event']) ?></h3>
-                        <img src="<?= htmlspecialchars($event['grid_image']) ?>" alt="Event Image">
+                        <h3><?= $event['event'] ?></h3>
+                        <img src="<?= $event['grid_image'] ?>" alt="image">
                     </a>
+                    <!-- Add Edit Button with a container for alignment -->
+                    <div class="edit-button-container">
+                        <a href="edit.php?id=<?= $event['id'] ?>" class="my-button">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>
