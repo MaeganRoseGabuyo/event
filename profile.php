@@ -1,5 +1,6 @@
 <?php
 include 'navbar.php';
+include 'footer.php';
 ?>
 
 
@@ -23,7 +24,6 @@ include 'navbar.php';
        
         /* Main Container */
         .container {
- 
             max-width: 900px;
             margin: 30px auto;
             padding: 20px;
@@ -84,10 +84,6 @@ include 'navbar.php';
         .edit-profile-btn:hover {
             background-color: #0056b3;
         }
-
-        
-   
-
     /* Page container */
     .container {
         margin-left: 450px; /* Space for the navigation bar */
@@ -129,9 +125,5 @@ include 'navbar.php';
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; Bounty Coders 2024. All rights reserved.</p>
-    </footer>
 </body>
 </html>

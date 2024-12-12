@@ -1,10 +1,30 @@
 <?php
-// Example data for demonstration
-$eventTitle = 'The Soccer Showdown';
-$eventDate = 'December 10, 2024';
-$eventTime = '3:00 PM - 6:00 PM';
-$eventLocation = 'National Sports Arena';
-$eventDescription = 'Join us for an exciting soccer match where the best teams compete for glory! Enjoy live commentary, food stalls, and activities for all ages.';
+include('database.php');
+
+//get_id from query string
+$id = $_GET['id'] ?? null;
+
+if (!$id){
+    header('Location: events.php');
+    exit;
+}
+
+//Select statement with placeholder 
+$sql ='SELECT * FROM events WHERE id = :id';
+
+//prepare the SELECT statement
+$stmt = $pdo->prepare($sql);
+
+//Parameters for prepared statement
+$params = ['id' =>$id];
+
+//execute the statement
+$stmt->execute($params);
+
+//fetch the post from the database
+$event = $stmt->fetch();
+
+/* var_dump($event); */
 ?>
 
 <!DOCTYPE html>
@@ -80,15 +100,20 @@ $eventDescription = 'Join us for an exciting soccer match where the best teams c
     <div class="container">
         <h1 class="main-title">Event Details</h1>
         <div class="event-details">
-            <img src="images/soccer.jpg" alt="<?= $eventTitle ?>">
-            <h2><?= $eventTitle ?></h2>
+            <img src="<?=$event['grid_image']?>" alt="image">
+            <h2><?=$event['event']?></h2>
 
-            <p><strong>Organizer:</strong>Mama mo</p>
-            <p><strong>Date:</strong> <?= $eventDate ?></p>
-            <p><strong>Time:</strong> <?= $eventTime ?></p>
-            <p><strong>Location:</strong> <?= $eventLocation ?></p>
+            <p><strong>Organizer:</strong> <?=$event['org']?></p>
+            <p><strong>Date:</strong> <?= !empty($event['date']) ? date("F j, Y", strtotime($event['date'])) : '' ?></p>
+            <p><strong>Time:</strong> 
+                <?= !empty($event['start_time']) ? date("g:i A", strtotime($event['start_time'])) : '' ?> 
+                <?= (!empty($event['start_time']) && !empty($event['end_time'])) ? ' - ' : '' ?>
+                <?= !empty($event['end_time']) ? date("g:i A", strtotime($event['end_time'])) : '' ?>
+            </p>
+            <p><strong>Location:</strong> <?=$event['loc']?></p>
+
             <p><strong>Description:</strong></p>
-            <p><?= $eventDescription ?></p>
+            <p><?=$event['desc']?></p>
         </div>
         <a href="events.php" style="text-decoration: none; color: #3b82f6;">&larr; Back to Events</a>
     </div>

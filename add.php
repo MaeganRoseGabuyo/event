@@ -1,3 +1,46 @@
+<?php 
+include('database.php');
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_event'])){
+    $event = htmlspecialchars($_POST['event'] ?? '');
+    $org = htmlspecialchars($_POST['org'] ?? '');
+    $date = htmlspecialchars($_POST['date'] ?? '');
+    $start_time = htmlspecialchars($_POST['start_time'] ?? '');
+    $end_time = htmlspecialchars($_POST['end_time'] ?? '');
+    $loc = htmlspecialchars($_POST['loc'] ?? '');
+    $desc = htmlspecialchars($_POST['desc'] ?? '');
+    $grid_image = htmlspecialchars($_POST['grid_image'] ?? '');
+   
+
+    // INSERT STATEMENT with placeholders for title and body
+
+    $sql='INSERT INTO events(event, org, `date`, start_time, end_time, loc, `desc`, grid_image)VALUES(:event, :org, :date, :start_time, :end_time, :loc, :desc, :grid_image)';
+
+    //prepare the statement
+    $stmt = $pdo->prepare($sql);
+
+    //params for prepared statement
+    $params = [
+        'event' => $event,
+        'org' => $org,
+        'date'=> $date,
+        'start_time'=> $start_time,
+        'end_time'=> $end_time,
+        'loc'=> $loc,
+        'desc' => $desc,
+        'grid_image' => $grid_image
+    ];
+
+    //execute the statement
+    $stmt->execute($params);
+
+    header('Location: events.php');
+    exit;
+}
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -136,35 +179,39 @@ input[type="number"], select {
         <h1><i class="fas fa-calendar-plus"></i> Add New Event</h1>
     </header>
 
-        <form id="addEventForm" action="submit_event.php" method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="eventTitle">Event Title</label>
-                <input type="text" id="eventTitle" name="eventTitle" required placeholder="Enter Event Title">
+                <input type="text" id="eventTitle" name="event" required placeholder="Enter Event Title">
             </div>
 
             <div class="form-group">
                 <label for="eventDescription">Event Description</label>
-                <textarea id="eventDescription" name="eventDescription" required placeholder="Describe the event in a few words"></textarea>
+                <textarea id="eventDescription" name="desc" required placeholder="Describe the event in a few words"></textarea>
             </div>
 
             <div class="form-group">
                 <label for="eventDate">Event Date</label>
-                <input type="date" id="eventDate" name="eventDate" required>
+                <input type="date" id="eventDate" name="date" required>
             </div>
 
             <div class="form-group">
-                <label for="eventTime">Event Time</label>
-                <input type="time" id="eventTime" name="eventTime" required>
+                <label for="eventTimeStart">Start Event Time</label>
+                <input type="time" id="eventTimeEnd" name="start_time" required>
+            </div>
+            <div class="form-group">
+                <label for="eventTimeEnd">End Event Time</label>
+                <input type="time" id="eventTimeEnd" name="end_time" required>
             </div>
 
             <div class="form-group">
                 <label for="eventLocation">Event Location</label>
-                <input type="text" id="eventLocation" name="eventLocation" required placeholder="Enter event location">
+                <input type="text" id="eventLocation" name="loc" required placeholder="Enter event location">
             </div>
 
             <div class="form-group">
                 <label for="eventImage">Event Image</label>
-                <input type="file" id="eventImage" name="eventImage" required>
+                <input type="file" id="eventImage" name="grid_image" required>
             </div>
 
             <div class="form-group">
@@ -191,11 +238,34 @@ input[type="number"], select {
             </div>
 
             <div class="form-actions">
-                <button type="submit" class="submit-btn">Save Event</button>
+                <button type="submit" class="submit-btn" name="add_event">Save Event</button>
                 <button type="button" class="cancel-btn" onclick="window.location.href='events.php'">Cancel</button>
             </div>
         </form>
     </div>
     </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const startTimeInput = document.getElementById("eventTimeStart");
+        const endTimeInput = document.getElementById("eventTimeEnd");
+
+        // When the start time changes, adjust the min value for the end time
+        startTimeInput.addEventListener("input", function () {
+            const startTime = startTimeInput.value;
+            endTimeInput.min = startTime; // Set the minimum value for the end time
+        });
+
+        // When the end time changes, validate it against the start time
+        endTimeInput.addEventListener("input", function () {
+            const startTime = startTimeInput.value;
+            const endTime = endTimeInput.value;
+
+            if (endTime < startTime) {
+                alert("End time cannot be earlier than the start time!");
+                endTimeInput.value = ""; // Clear the invalid input
+            }
+        });
+    });
+</script>
 </body>
 </html>
