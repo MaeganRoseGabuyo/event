@@ -90,6 +90,11 @@ include 'footer.php';
         padding: 16px;
         flex: 1;
     }
+    @media(max-width: 800px){
+            .container{
+                margin-left: 0px;
+            }
+        }
 
     </style>
 </head>

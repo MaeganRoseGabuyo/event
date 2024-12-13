@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $eventName = $_POST['event_name'];
     $eventOrg = $_POST['event_org'];
     $eventDesc = $_POST['event_desc'];
+    $eventCateg = $_POST['event_categ'];
     $eventDate = $_POST['event_date'];
     $startTime = $_POST['start_time'];
     $endTime = $_POST['end_time'];
@@ -46,11 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $eventImagePath = $event['grid_image'];
     }
 
-    $updateStmt = $pdo->prepare('UPDATE events SET event = :event, org = :org, `desc` = :desc, `date` = :date, start_time = :start_time, end_time = :end_time, loc = :loc, grid_image = :grid_image  WHERE id = :id');
+    $updateStmt = $pdo->prepare('UPDATE events SET event = :event, org = :org, `desc` = :desc, categ = :categ, `date` = :date, start_time = :start_time, end_time = :end_time, loc = :loc, grid_image = :grid_image  WHERE id = :id');
     $updateStmt->execute([
         'event' => $eventName,
         'org' => $eventOrg,
         'desc' => $eventDesc,
+        'categ' => $eventCateg,
         'date' => $eventDate,
         'start_time' => $startTime,
         'end_time' => $endTime,
@@ -85,6 +87,108 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Event</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        body {
+    font-family: 'Poppins', sans-serif;
+    background-color:  #f1ee8e;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+}
+
+header h1 {
+    font-size: 32px;
+    text-align: center;
+    color: #333;
+    margin-top:5px;
+    margin-bottom: 20px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    font-weight: 600;
+    color: #333;
+}
+
+input, select, textarea {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="file"] {
+    padding: 6px;
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+input[type="number"], select {
+    max-width: 200px;
+}
+
+/* Action Buttons */
+.submit-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+.cancel-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Success Message */
+.success-message {
+    font-size: 18px;
+    font-weight: bold;
+    color: #28a745;
+    text-align: center;
+    margin-top: 20px;
+}
+    </style>
 </head>
 <body>
     <div class="container">
@@ -120,20 +224,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="form-group">
                 <label for="event_image">Event Image</label>
-                <input type="file" class="form-control" id="event_image" name="event_image">
+                <input type="file" class="form-control" id="event_image" name="event_image" value="<?= htmlspecialchars($event['grid_image']) ?>">
             </div>
             <div class="form-group">
                 <label for="event_category">Category</label>
-                <select id="eventCategory" name="eventCategory" required>
-                    <option value="" disabled selected>Select Category</option>
-                    <option value="sports">Sports</option>
-                    <option value="entertainment">Fitness</option>
-                    <option value="seminar">E-Sports</option>
+                <select id="eventCategory" name="event_categ" required>
+                    <option value="" disabled <?= empty($event['categ']) ? 'selected' : '' ?>>Select Category</option>
+                    <option value="Sports" <?= $event['categ'] === 'Sports' ? 'selected' : '' ?>>Sports</option>
+                    <option value="Fitness" <?= $event['categ'] === 'Fitness' ? 'selected' : '' ?>>Fitness</option>
+                    <option value="E-Sports" <?= $event['categ'] === 'E-Sports' ? 'selected' : '' ?>>E-Sports</option>
                 </select>
-            </div>
-            <div class="form-group">
-                <label for="eventCapacity">Event Capacity</label>
-                <input type="number" id="eventCapacity" name="eventCapacity" required placeholder="Max number of participants">
             </div>
             <div class="form-group">
                 <label for="eventStatus">Event Status</label>

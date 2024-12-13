@@ -3,15 +3,22 @@ include 'navbar.php';
 include 'footer.php';
 include('database.php');
 
-//Prepare a SELECT statement
-$stmt = $pdo->prepare('SELECT * FROM events');
+// Get selected category from URL or default to "All"
+$selectedCategory = isset($_GET['category']) ? $_GET['category'] : 'All';
 
-//Execute the statement
+// Prepare a SELECT statement with category filtering
+if ($selectedCategory === 'All') {
+    $stmt = $pdo->prepare('SELECT * FROM events');
+} else {
+    $stmt = $pdo->prepare('SELECT * FROM events WHERE categ = :category');
+    $stmt->bindParam(':category', $selectedCategory);
+}
+
+// Execute the statement
 $stmt->execute();
 
-//Fetch the result
+// Fetch the result
 $events = $stmt->fetchAll();
-
 // Your PHP variables remain unchanged
 $title = 'Events';
 $pageTitle5 = 'EVENTS '.date("Y");
@@ -104,6 +111,39 @@ $pageTitle5 = 'EVENTS '.date("Y");
             background-color: #9bbcff;
         }
 
+        .button-container {
+            display: flex;
+            justify-content: space-between; /* Space between the two buttons */
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .category-form {
+            margin: 0; /* Remove default margin for the form */
+        }
+
+        .my-button.dropdown {
+            background-color:rgb(241, 135, 15); /* Style for the dropdown button */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .my-button.dropdown:hover {
+            background-color:rgb(235, 193, 104);
+        }
+
+        @media(max-width: 800px){
+            .container{
+                margin-left: 0px;
+            }
+        }
+        
+
     </style>
 </head>
 <body>
@@ -111,11 +151,24 @@ $pageTitle5 = 'EVENTS '.date("Y");
     <div class="container">
         <h1 class="main-title"><?= $pageTitle5 ?></h1>
 
-        <a href="add.php">
-            <button class="my-button">
-                <i class="fas fa-plus"></i> Add Event
-            </button>
-        </a>
+        <div class="button-container">
+    <!-- Add Event Button -->
+            <a href="add.php">
+                <button class="my-button">
+                    <i class="fas fa-plus"></i> Add Event
+                </button>
+            </a>
+
+            <!-- Category Filter Dropdown -->
+            <form method="GET" class="category-form">
+                <select name="category" onchange="this.form.submit()" class="my-button dropdown">
+                    <option value="All" <?= $selectedCategory === 'All' ? 'selected' : '' ?>>All Categories</option>
+                    <option value="Sports" <?= $selectedCategory === 'Sports' ? 'selected' : '' ?>>Sports</option>
+                    <option value="Fitness" <?= $selectedCategory === 'Fitness' ? 'selected' : '' ?>>Fitness</option>
+                    <option value="E-Sports" <?= $selectedCategory === 'E-Sports' ? 'selected' : '' ?>>E-Sports</option>
+                </select>
+            </form>
+        </div>
 
         <div class="event-grid">
             <?php foreach($events as $event): ?>

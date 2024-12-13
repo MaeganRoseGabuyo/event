@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_event'])) {
     $end_time = htmlspecialchars($_POST['end_time'] ?? '');
     $loc = htmlspecialchars($_POST['loc'] ?? '');
     $desc = htmlspecialchars($_POST['desc'] ?? '');
+    $categ = htmlspecialchars($_POST['categ'] ?? '');
 
     // Handle the file upload
     if (isset($_FILES['grid_image']) && $_FILES['grid_image']['error'] === UPLOAD_ERR_OK) {
@@ -27,8 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_event'])) {
     }
 
     // Prepare the SQL INSERT statement
-    $sql = 'INSERT INTO events (event, org, `date`, start_time, end_time, loc, `desc`, grid_image) 
-            VALUES (:event, :org, :date, :start_time, :end_time, :loc, :desc, :grid_image)';
+    $sql = 'INSERT INTO events (event, org, `date`, start_time, end_time, loc, `desc`, categ, grid_image) 
+            VALUES (:event, :org, :date, :start_time, :end_time, :loc, :desc, :categ, :grid_image)';
 
     // Prepare the statement
     $stmt = $pdo->prepare($sql);
@@ -42,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_event'])) {
         'end_time' => $end_time,
         'loc' => $loc,
         'desc' => $desc,
+        'categ' => $categ,
         'grid_image' => $grid_image
     ];
 
@@ -245,17 +247,12 @@ input[type="number"], select {
 
             <div class="form-group">
                 <label for="eventCategory">Event Category</label>
-                <select id="eventCategory" name="eventCategory" required>
+                <select id="eventCategory" name="categ" required>
                     <option value="" disabled selected>Select Category</option>
-                    <option value="sports">Sports</option>
-                    <option value="entertainment">Fitness</option>
-                    <option value="seminar">E-Sports</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Fitness">Fitness</option>
+                    <option value="E-Sports">E-Sports</option>
                 </select>
-            </div>
-
-            <div class="form-group">
-                <label for="eventCapacity">Event Capacity</label>
-                <input type="number" id="eventCapacity" name="eventCapacity" required placeholder="Max number of participants">
             </div>
 
             <div class="form-group">

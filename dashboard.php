@@ -4,15 +4,12 @@ include('database.php');
 include 'navbar.php';
 include 'footer.php';
 
-//Prepare a SELECT statement
-$stmt = $pdo->prepare(query: 'SELECT * FROM events');
-
-//Execute the statement
+// Prepare a SELECT statement for events
+$stmt = $pdo->prepare('SELECT * FROM events');
 $stmt->execute();
-
-//Fetch the result
 $events = $stmt->fetchAll();
 
+// Query for recent activities
 $activityStmt = $pdo->prepare('SELECT action_type, action_details, created_at FROM recent_activities ORDER BY created_at DESC LIMIT 8');
 $activityStmt->execute();
 $recentActivities = $activityStmt->fetchAll();
@@ -25,9 +22,12 @@ $deleteStmt = $pdo->prepare('DELETE FROM recent_activities WHERE id NOT IN (
 )');
 $deleteStmt->execute();
 
+// Query for trending category
+$trendingCategoryStmt = $pdo->prepare('SELECT categ, COUNT(*) AS count FROM events GROUP BY categ ORDER BY count DESC LIMIT 1');
+$trendingCategoryStmt->execute();
+$trendingCategory = $trendingCategoryStmt->fetch();
 
 $title = 'Dashboard';
-
 ?>
 
 <!DOCTYPE html>
@@ -37,9 +37,8 @@ $title = 'Dashboard';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title><?= $title ?></title>
-   
+    
     <style>
-        
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f1ee8e;
@@ -60,7 +59,6 @@ $title = 'Dashboard';
             overflow: auto;
         }
 
-        /* Main content styling */
         .main-content {
             display: flex;
             flex-direction: column;
@@ -71,7 +69,6 @@ $title = 'Dashboard';
             margin-bottom: 20px;
         }
 
-        /* Stats Section */
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -96,7 +93,6 @@ $title = 'Dashboard';
             color: #666;
         }
 
-        /* Activity Feed */
         .activity-feed {
             margin-top: 30px;
         }
@@ -129,45 +125,61 @@ $title = 'Dashboard';
             width: 100%;
             bottom: 0;
         }
+
+        @media(max-width: 800px){
+            .container{
+                margin-left: 0px;
+            }
+        }
     </style>
 </head>
-
 <body>
     <div class="container">
-        <!-- Welcome message -->
-        <h1>Welcome to your BCEMS Dashboard!</h1>
-
-        <!-- Stats section -->
+        <center>
+            <h1>Welcome to your BCEMS Dashboard!</h1>
+        </center>
         <div class="stats">
             <div class="stat-card">
                 <h2><?php
                         $dash_totalEvents_query = "SELECT * FROM events";
                         $dash_totalEvents_query_run = mysqli_query($con, $dash_totalEvents_query);
-                        if($totalEvents = mysqli_num_rows($dash_totalEvents_query_run))
-                        {
+                        if($totalEvents = mysqli_num_rows($dash_totalEvents_query_run)) {
                             echo $totalEvents;
-                        }
-                        else{
+                        } else {
                             echo '<p>No data<p/>';
                         }  
                         ?></td></h2>
                 <p>Total Events</p>
             </div>
+
             <div class="stat-card">
-                <h2>150</h2>
-                <p>Total Participants</p>
+                <h2><?= htmlspecialchars($trendingCategory['categ'] ?? 'N/A') ?></h2>
+                <p>Trending Category<br>with <?= htmlspecialchars($trendingCategory['count'] ?? 0) ?> events booked</p>
             </div>
+
             <div class="stat-card">
-                <h2>5</h2>
+                <h2><?php $upcomming_events = "SELECT * FROM events WHERE date >= CURDATE() ORDER BY date ASC"; 
+                $upcomming_events_run = mysqli_query($con, $upcomming_events);
+                if($total_upcomming_events = mysqli_num_rows($upcomming_events_run)) {
+                    echo $total_upcomming_events;
+                } else {
+                    echo '<p>No data<p/>';
+                }  ?></h2>
                 <p>Upcoming Events</p>
             </div>
+
             <div class="stat-card">
-                <h2>12</h2>
-                <p>Events Pending Approval</p>
+                <h2><?php $past_events = "SELECT * FROM events WHERE date < CURDATE() ORDER BY date ASC"; 
+                $past_events_run = mysqli_query($con, $past_events);
+                if($total_past_events = mysqli_num_rows($past_events_run)) {
+                    echo $total_past_events;
+                } else {
+                    echo '<p>No data<p/>';
+                }  ?></h2>
+                <p>Past events</p>
             </div>
         </div>
 
-        <!-- Recent Activity Feed -->
         <div class="activity-feed">
             <h3>Recent Activities</h3>
             <?php foreach ($recentActivities as $activity): ?>
@@ -176,7 +188,6 @@ $title = 'Dashboard';
                     <?= htmlspecialchars($activity['action_details']) ?>
                     <small>(<?= date('F j, Y, g:i a', strtotime($activity['created_at'])) ?>)</small>
                 </div>
-                
             <?php endforeach; ?>
         </div>
     </div>

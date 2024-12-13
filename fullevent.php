@@ -53,11 +53,11 @@ if (!$event) {
             height: 100%;
             overflow: auto;
         }
-
+        
         .main-title {
             text-align: center;
             font-size: 2.5rem;
-            color: #e6b400;
+            color: #000000;
             font-weight: 600;
             margin: 2rem 0;
         }
@@ -78,7 +78,7 @@ if (!$event) {
         }
 
         .event-details h2 {
-            font-size: 1.75rem;
+            font-size: 2rem;
             color: #e6b400;
             margin-bottom: 1rem;
         }
@@ -87,6 +87,8 @@ if (!$event) {
             font-size: 1rem;
             color: #4a5568;
             margin-bottom: 0.5rem;
+            text-align: justify;
+            margin: 10px;
         }
 
         .back-button {
@@ -97,7 +99,7 @@ if (!$event) {
             border: none;
             text-decoration: none;
             border-radius: 4px;
-            margin-top: 1rem;
+           
             margin-bottom: 20px;
             transition: background-color 0.3s;
         }
@@ -120,7 +122,6 @@ if (!$event) {
             border: none;
             text-decoration: none;
             border-radius: 4px;
-            margin-top: 1rem;
             height: 39px;
             margin-bottom: 20px;
             transition: background-color 0.3s;
@@ -132,6 +133,11 @@ if (!$event) {
         .delete-button:hover {
             background-color:rgb(255, 155, 155);
         }
+        @media(max-width: 800px){
+            .container{
+                margin-left: 0px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -140,6 +146,7 @@ if (!$event) {
         <div class="event-details">
             <img src="<?= htmlspecialchars($event['grid_image']) ?>" alt="Event Image" onerror="this.onerror=null;this.src='placeholder.jpg';">
             <h2><?= htmlspecialchars($event['event']) ?></h2>
+            <h3>Category: <?= htmlspecialchars($event['categ']) ?></h3>
 
             <p><strong>Organizer:</strong> <?=!empty($event['org']) ? nl2br(htmlspecialchars($event['org'])): 'No Organization Assigned' ?></p>
             <p><strong>Date:</strong> <?= !empty($event['date']) ? date("F j, Y", strtotime($event['date'])) : 'No data assigned' ?></p>
