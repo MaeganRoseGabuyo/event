@@ -133,17 +133,23 @@ include 'navbar.php';
 </head>
 
 <body>
+<!-- Inside your navbar, add the collapsible button -->
 <div class="navbar">
-        <div>
-            <img src="images/ylogo.png">
-        </div>
-        <ul>
-            <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li><a href="events.php"><i class="fas fa-calendar"></i> Events</a></li>
-            <li><a href="profile.php"><i class="fas fa-user"></i> Profile</a></li>
-            <li><a href="settings.php"><i class="fas fa-cogs"></i> Settings</a></li>
-        </ul>
+    <div>
+        <img src="images/ylogo.png" alt="Logo">
     </div>
+    <ul>
+        <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><a href="events.php"><i class="fas fa-calendar"></i> Events</a></li>
+        <li><a href="profile.php"><i class="fas fa-user"></i> Profile</a></li>
+        <li><a href="settings.php"><i class="fas fa-cogs"></i> Settings</a></li>
+    </ul>
+    <!-- Add the collapsible button -->
+    <button class="navbar-toggler" id="navbar-toggler">
+        <i class="fas fa-bars"></i> <!-- Hamburger icon -->
+    </button>
+</div>
+
 
     <div class="container">
         <!-- Welcome message -->
@@ -183,6 +189,19 @@ include 'navbar.php';
             </div>
         </div>
     </div>
+
+    <button class="navbar-toggler" id="navbar-toggler">
+    <i class="fas fa-bars"></i> <!-- Hamburger icon -->
+</button>
+
+<script>
+    // Add event listener to toggle the sidebar visibility
+    document.getElementById('navbar-toggler').addEventListener('click', function () {
+        const navbar = document.querySelector('.navbar');
+        navbar.classList.toggle('open');
+    });
+</script>
+    
 
     <footer>
     <p>&copy; Bounty Coders 2024. All rights reserved.</p>

@@ -4,21 +4,57 @@
 <body>
     
     <style>
+/* Default Navbar Styling */
+.navbar {
+    width: 260px;
+    background-color: #F4730B;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
 
-
-    .navbar {
-        width: 260px;
-        background-color: #F4730B;
-        color: #ffffff;
-        display: flex;
-        flex-direction: column;
-        padding: 20px 10px;
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-
+/* Make the toggle button visible on small screens */
+@media (max-width: 768px) {
+    .navbar ul {
+        display: none; /* Hide navbar links by default on small screens */
     }
+
+    .navbar.open ul {
+        display: block; /* Show links when navbar is open */
+    }
+
+    .navbar-toggler {
+        display: block;
+        background-color: transparent;
+        border: none;
+        font-size: 2rem;
+        color: #fff;
+        cursor: pointer;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+    }
+}
+
+.navbar-toggler {
+    display: none; /* Hidden on large screens */
+}
+
+/* Add some padding to the body to prevent content from being hidden behind the navbar */
+body {
+    padding-left: 260px; /* Ensure body content is visible */
+}
+
+/* When navbar is open, display the navbar items */
+.navbar.open {
+    left: 0;
+}
+
 
     .navbar img {
         height: 150px; 
@@ -78,6 +114,7 @@
         }
 
     </style>
+
 
     
 </body>
