@@ -30,6 +30,21 @@ $navbarItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     }
 
+    .navbar.open ul {
+        display: block; /* Show links when navbar is open */
+    }
+
+    .navbar-toggler {
+        display: block;
+        background-color: transparent;
+        border: none;
+        font-size: 2rem;
+        color: #fff;
+        cursor: pointer;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+    }
     .navbar img {
         height: 150px; 
         width: 150px; 

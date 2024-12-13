@@ -75,14 +75,14 @@ include 'footer.php';
             display: inline-block;
             margin-top: 20px;
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: #e47200;
             color: white;
             text-decoration: none;
             border-radius: 5px;
         }
 
         .edit-profile-btn:hover {
-            background-color: #0056b3;
+            background-color: #e6b400;
         }
     /* Page container */
     .container {
