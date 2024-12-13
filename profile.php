@@ -1,5 +1,6 @@
 <?php
 include 'navbar.php';
+include 'footer.php';
 ?>
 
 
@@ -23,7 +24,6 @@ include 'navbar.php';
        
         /* Main Container */
         .container {
- 
             max-width: 900px;
             margin: 30px auto;
             padding: 20px;
@@ -84,10 +84,6 @@ include 'navbar.php';
         .edit-profile-btn:hover {
             background-color: #0056b3;
         }
-
-        
-   
-
     /* Page container */
     .container {
         margin-left: 450px; /* Space for the navigation bar */
@@ -98,19 +94,6 @@ include 'navbar.php';
     </style>
 </head>
 <body>
-<div class="navbar">
-        <div>
-            <img src="images/ylogo.png">
-        </div>
-        <ul>
-            <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li><a href="events.php"><i class="fas fa-calendar"></i> Events</a></li>
-            <li><a href="participants.php"><i class="fas fa-users"></i> Participants</a></li>
-            <li><a href="profile.php"><i class="fas fa-user"></i> Profile</a></li>
-            <li><a href="settings.php"><i class="fas fa-cogs"></i> Settings</a></li>
-        </ul>
-    </div>
-
     <!-- Main Content -->
     <div class="container">
         <h1 class="main-title">Profile</h1>
@@ -129,9 +112,5 @@ include 'navbar.php';
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; Bounty Coders 2024. All rights reserved.</p>
-    </footer>
 </body>
 </html>
