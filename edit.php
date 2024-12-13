@@ -59,6 +59,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'id' => $eventId
     ]);
 
+    // Execute the statement
+    $stmt->execute($params);
+
+    // Log the recent activity
+    $actionType = 'Event Modified';
+    $actionDetails = "Event '{$eventName}' details was modified.";
+    $logSql = 'INSERT INTO recent_activities (action_type, action_details) VALUES (:action_type, :action_details)';
+    $logStmt = $pdo->prepare($logSql);
+    $logParams = [
+        'action_type' => $actionType,
+        'action_details' => $actionDetails
+    ];
+    $logStmt->execute($logParams);
+
     header('Location: events.php'); // Redirect back to the events page
     exit;
 }

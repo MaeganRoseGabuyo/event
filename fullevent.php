@@ -1,6 +1,6 @@
 <?php
 include 'navbar.php';
-include 'footer.php';
+
 include('database.php');
 
 // Get the event ID from the query string
@@ -94,10 +94,12 @@ if (!$event) {
             padding: 10px 20px;
             background-color: #007bff;
             color: #fff;
+            border: none;
             text-decoration: none;
             border-radius: 4px;
             margin-top: 1rem;
             margin-bottom: 20px;
+            transition: background-color 0.3s;
         }
 
         .back-button:hover {
@@ -110,19 +112,25 @@ if (!$event) {
                 justify-content: center;  /* Center the button horizontally */
                 margin-bottom: 10px;  /* Add some space below the button */
         }
-        .my-button {
+        .delete-button {
+            display: inline-block;
             padding: 10px 20px;
-            font-size: 16px;
-            background-color: #3b82f6;
-            color: white;
+            background-color:red;
+            color: #fff;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 1rem;
+            height: 39px;
+            margin-bottom: 20px;
             transition: background-color 0.3s;
         }
 
         .my-button:hover {
             background-color: #9bbcff;
+        }
+        .delete-button:hover {
+            background-color:rgb(255, 155, 155);
         }
     </style>
 </head>
@@ -144,13 +152,17 @@ if (!$event) {
             <p><strong>Description:</strong></p>
             <p><?=!empty($event['desc']) ? nl2br(htmlspecialchars($event['desc'])): 'No description' ?></p>
         </div>
+        <form action="delete.php" method="POST" >
         <a href="events.php" class="back-button">&larr; Back to Events</a>
-        <a href="edit.php?id=<?= $event['id'] ?>" class="my-button">
+        <a href="edit.php?id=<?= $event['id'] ?>" class="back-button">
             <i class="fas fa-edit"></i> Edit
         </a>
-    
+            <input type="hidden" name="_method" value="delete">
+            <input type="hidden" name="id" value="<?= $event['id']?>">
+            <input class="delete-button" type="submit" name="submit" value="Delete">
+        </form>
+       
+        
     </div>
-    <!-- Add Edit Button with a container for alignment -->
-    
 </body>
 </html>

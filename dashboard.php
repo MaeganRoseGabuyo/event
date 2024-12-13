@@ -13,7 +13,7 @@ $stmt->execute();
 //Fetch the result
 $events = $stmt->fetchAll();
 
-$activityStmt = $pdo->prepare('SELECT action_type, action_details, created_at FROM recent_activities ORDER BY created_at DESC LIMIT 4');
+$activityStmt = $pdo->prepare('SELECT action_type, action_details, created_at FROM recent_activities ORDER BY created_at DESC LIMIT 8');
 $activityStmt->execute();
 $recentActivities = $activityStmt->fetchAll();
 
