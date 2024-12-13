@@ -69,7 +69,7 @@ $pageTitle5 = 'EVENTS 2024';
                 display: flex;  /* Use Flexbox */
                 flex-direction: column;  /* Stack items vertically */
                 justify-content: space-between;  /* Space between content and button */
-                height: 100%;
+                
          }
 
         .event-card a {
@@ -90,12 +90,6 @@ $pageTitle5 = 'EVENTS 2024';
                 margin-bottom: 1rem;
          }
 
-        .edit-button-container {
-                margin-top: auto; /* Push the button to the bottom of the card */
-                display: flex;
-                justify-content: center;  /* Center the button horizontally */
-                margin-bottom: 10px;  /* Add some space below the button */
-        }
         .my-button {
             padding: 10px 20px;
             font-size: 16px;
@@ -131,12 +125,6 @@ $pageTitle5 = 'EVENTS 2024';
                         <h3><?= $event['event'] ?></h3>
                         <img src="<?= $event['grid_image'] ?>" alt="image">
                     </a>
-                    <!-- Add Edit Button with a container for alignment -->
-                    <div class="edit-button-container">
-                        <a href="edit.php?id=<?= $event['id'] ?>" class="my-button">
-                            <i class="fas fa-edit"></i> Edit
-                        </a>
-                    </div>
                 </div>
             <?php endforeach; ?>
         </div>

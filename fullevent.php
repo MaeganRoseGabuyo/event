@@ -72,8 +72,7 @@ if (!$event) {
 
         .event-details img {
             width: 100%; /* Ensures the image stretches to fit the container */
-            height: 300px; /* Maintains the image's aspect ratio */
-            object-fit: cover; /* Ensures the entire image is visible */
+            height: auto; /* Maintains the image's aspect ratio */ /* Ensures the entire image is visible */
             border-radius: 8px;
             margin-bottom: 1rem;
         }
@@ -98,10 +97,32 @@ if (!$event) {
             text-decoration: none;
             border-radius: 4px;
             margin-top: 1rem;
+            margin-bottom: 20px;
         }
 
         .back-button:hover {
             background-color: #0056b3;
+        }
+
+        .edit-button-container {
+                margin-top: auto; /* Push the button to the bottom of the card */
+                display: flex;
+                justify-content: center;  /* Center the button horizontally */
+                margin-bottom: 10px;  /* Add some space below the button */
+        }
+        .my-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .my-button:hover {
+            background-color: #9bbcff;
         }
     </style>
 </head>
@@ -112,19 +133,24 @@ if (!$event) {
             <img src="<?= htmlspecialchars($event['grid_image']) ?>" alt="Event Image" onerror="this.onerror=null;this.src='placeholder.jpg';">
             <h2><?= htmlspecialchars($event['event']) ?></h2>
 
-            <p><strong>Organizer:</strong> <?= htmlspecialchars($event['org']) ?></p>
-            <p><strong>Date:</strong> <?= !empty($event['date']) ? date("F j, Y", strtotime($event['date'])) : 'TBA' ?></p>
+            <p><strong>Organizer:</strong> <?=!empty($event['org']) ? nl2br(htmlspecialchars($event['org'])): 'No Organization Assigned' ?></p>
+            <p><strong>Date:</strong> <?= !empty($event['date']) ? date("F j, Y", strtotime($event['date'])) : 'No data assigned' ?></p>
             <p><strong>Time:</strong> 
                 <?= !empty($event['start_time']) ? date("g:i A", strtotime($event['start_time'])) : '' ?> 
                 <?= (!empty($event['start_time']) && !empty($event['end_time'])) ? ' - ' : '' ?>
                 <?= !empty($event['end_time']) ? date("g:i A", strtotime($event['end_time'])) : '' ?>
             </p>
-            <p><strong>Location:</strong> <?= htmlspecialchars($event['loc']) ?></p>
-
+            <p><strong>Location:</strong> <?= !empty($event['loc']) ? htmlspecialchars($event['loc']): 'No location assigned' ?></p>
             <p><strong>Description:</strong></p>
-            <p><?= nl2br(htmlspecialchars($event['desc'])) ?></p>
+            <p><?=!empty($event['desc']) ? nl2br(htmlspecialchars($event['desc'])): 'No description' ?></p>
         </div>
         <a href="events.php" class="back-button">&larr; Back to Events</a>
+        <a href="edit.php?id=<?= $event['id'] ?>" class="my-button">
+            <i class="fas fa-edit"></i> Edit
+        </a>
+    
     </div>
+    <!-- Add Edit Button with a container for alignment -->
+    
 </body>
 </html>

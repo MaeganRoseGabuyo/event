@@ -82,11 +82,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="form-group">
                 <label for="event_org">Organization</label>
-                <input type="text" class="form-control" id="event_org" name="event_org" value="<?= htmlspecialchars($event['org']) ?>" required>
+                <input type="text" class="form-control" id="event_org" name="event_org" value="<?=!empty($event['org']) ? nl2br(htmlspecialchars($event['org'])): '' ?>" required>
             </div>
             <div class="form-group">
                 <label for="event_desc">Event Description</label>
-                <textarea class="form-control" id="event_desc" name="event_desc" required><?= htmlspecialchars($event['desc']) ?></textarea>
+                <textarea class="form-control" id="event_desc" name="event_desc" required><?=!empty($event['desc']) ? nl2br(htmlspecialchars($event['desc'])): '' ?></textarea>
             </div>
             <div class="form-group">
                 <label for="event_date">Event Date</label>
@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="form-group">
                 <label for="event_location">Location</label>
-                <input type="text" class="form-control" id="event_location" name="event_location" value="<?= htmlspecialchars($event['loc']) ?>" required>
+                <input type="text" class="form-control" id="event_location" name="event_location" value="<?= !empty($event['loc']) ? htmlspecialchars($event['loc']): '' ?>" required>
             </div>
             <div class="form-group">
                 <label for="event_image">Event Image</label>

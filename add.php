@@ -48,6 +48,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_event'])) {
     // Execute the statement
     $stmt->execute($params);
 
+    // Log the recent activity
+    $actionType = 'Event Added';
+    $actionDetails = " '{$event}' added to the event list.";
+    $logSql = 'INSERT INTO recent_activities (action_type, action_details) VALUES (:action_type, :action_details)';
+    $logStmt = $pdo->prepare($logSql);
+    $logParams = [
+        'action_type' => $actionType,
+        'action_details' => $actionDetails
+    ];
+    $logStmt->execute($logParams);
+
     // Redirect to the events page
     header('Location: events.php');
     exit;

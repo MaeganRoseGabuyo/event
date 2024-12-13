@@ -13,8 +13,21 @@ $stmt->execute();
 //Fetch the result
 $events = $stmt->fetchAll();
 
+$activityStmt = $pdo->prepare('SELECT action_type, action_details, created_at FROM recent_activities ORDER BY created_at DESC LIMIT 4');
+$activityStmt->execute();
+$recentActivities = $activityStmt->fetchAll();
+
+// Optional: Delete older activities beyond the latest 100
+$deleteStmt = $pdo->prepare('DELETE FROM recent_activities WHERE id NOT IN (
+    SELECT id FROM (
+        SELECT id FROM recent_activities ORDER BY created_at DESC LIMIT 100
+    ) as temp
+)');
+$deleteStmt->execute();
+
+
 $title = 'Dashboard';
-include 'navbar.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -157,17 +170,15 @@ include 'navbar.php';
         <!-- Recent Activity Feed -->
         <div class="activity-feed">
             <h3>Recent Activities</h3>
-            <div class="activity-card">
-                <p><strong>Event Added:</strong> "The Soccer Showdown" added to the event list.</p>
-            </div>
-            <div class="activity-card">
-                <p><strong>New Participant:</strong> John Doe joined "The Soccer Showdown" event.</p>
-            </div>
-            <div class="activity-card">
-                <p><strong>Event Updated:</strong> "Race to Victory" details updated by Admin.</p>
-            </div>
+            <?php foreach ($recentActivities as $activity): ?>
+                <div class="activity-card">
+                    <strong><?= htmlspecialchars($activity['action_type']) ?>:</strong>
+                    <?= htmlspecialchars($activity['action_details']) ?>
+                    <small>(<?= date('F j, Y, g:i a', strtotime($activity['created_at'])) ?>)</small>
+                </div>
+                
+            <?php endforeach; ?>
         </div>
     </div>
-
 </body>
 </html>
