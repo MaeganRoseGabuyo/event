@@ -1,10 +1,29 @@
 <?php
-// Example data for demonstration
-$eventTitle = 'The Soccer Showdown';
-$eventDate = 'December 10, 2024';
-$eventTime = '3:00 PM - 6:00 PM';
-$eventLocation = 'National Sports Arena';
-$eventDescription = 'Join us for an exciting soccer match where the best teams compete for glory! Enjoy live commentary, food stalls, and activities for all ages.';
+include 'navbar.php';
+include 'footer.php';
+include('database.php');
+
+// Get the event ID from the query string
+$id = $_GET['id'] ?? null;
+
+if (!$id) {
+    header('Location: events.php');
+    exit;
+}
+
+// Prepare a SELECT statement with a placeholder
+$sql = 'SELECT * FROM events WHERE id = :id';
+$stmt = $pdo->prepare($sql);
+$params = ['id' => $id];
+$stmt->execute($params);
+
+// Fetch the event from the database
+$event = $stmt->fetch();
+
+if (!$event) {
+    echo "<h1>Event not found</h1>";
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -12,11 +31,13 @@ $eventDescription = 'Join us for an exciting soccer match where the best teams c
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $eventTitle ?> - Event Details</title>
+    <title><?= htmlspecialchars($event['event']) ?> - Event Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color:  #f1ee8e;
+            background-color: #f1ee8e;
             margin: 0;
             padding-bottom: 20px;
             display: flex;
@@ -25,15 +46,18 @@ $eventDescription = 'Join us for an exciting soccer match where the best teams c
         }
 
         .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 16px;
+            flex: 1;
+            margin-left: 280px;
+            flex-direction: column;
+            padding: 20px;
+            height: 100%;
+            overflow: auto;
         }
 
         .main-title {
             text-align: center;
             font-size: 2.5rem;
-            color: #e6b400; /* text-blue-900 */
+            color: #e6b400;
             font-weight: 600;
             margin: 2rem 0;
         }
@@ -47,8 +71,8 @@ $eventDescription = 'Join us for an exciting soccer match where the best teams c
         }
 
         .event-details img {
-            width: 100%;
-            height: auto;
+            width: 100%; /* Ensures the image stretches to fit the container */
+            height: auto; /* Maintains the image's aspect ratio */ /* Ensures the entire image is visible */
             border-radius: 8px;
             margin-bottom: 1rem;
         }
@@ -61,18 +85,44 @@ $eventDescription = 'Join us for an exciting soccer match where the best teams c
 
         .event-details p {
             font-size: 1rem;
-            color: #4a5568; /* text-gray-700 */
+            color: #4a5568;
             margin-bottom: 0.5rem;
         }
 
-        footer {
-        background-color: #e69b00;
-        color: #fff;
-        padding: 2px;
-        text-align: center;
-        position: fixed;
-        width: 100%;
-        bottom: 0;
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        .edit-button-container {
+                margin-top: auto; /* Push the button to the bottom of the card */
+                display: flex;
+                justify-content: center;  /* Center the button horizontally */
+                margin-bottom: 10px;  /* Add some space below the button */
+        }
+        .my-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .my-button:hover {
+            background-color: #9bbcff;
         }
     </style>
 </head>
@@ -80,21 +130,27 @@ $eventDescription = 'Join us for an exciting soccer match where the best teams c
     <div class="container">
         <h1 class="main-title">Event Details</h1>
         <div class="event-details">
-            <img src="images/soccer.jpg" alt="<?= $eventTitle ?>">
-            <h2><?= $eventTitle ?></h2>
+            <img src="<?= htmlspecialchars($event['grid_image']) ?>" alt="Event Image" onerror="this.onerror=null;this.src='placeholder.jpg';">
+            <h2><?= htmlspecialchars($event['event']) ?></h2>
 
-            <p><strong>Organizer:</strong>Mama mo</p>
-            <p><strong>Date:</strong> <?= $eventDate ?></p>
-            <p><strong>Time:</strong> <?= $eventTime ?></p>
-            <p><strong>Location:</strong> <?= $eventLocation ?></p>
+            <p><strong>Organizer:</strong> <?=!empty($event['org']) ? nl2br(htmlspecialchars($event['org'])): 'No Organization Assigned' ?></p>
+            <p><strong>Date:</strong> <?= !empty($event['date']) ? date("F j, Y", strtotime($event['date'])) : 'No data assigned' ?></p>
+            <p><strong>Time:</strong> 
+                <?= !empty($event['start_time']) ? date("g:i A", strtotime($event['start_time'])) : '' ?> 
+                <?= (!empty($event['start_time']) && !empty($event['end_time'])) ? ' - ' : '' ?>
+                <?= !empty($event['end_time']) ? date("g:i A", strtotime($event['end_time'])) : '' ?>
+            </p>
+            <p><strong>Location:</strong> <?= !empty($event['loc']) ? htmlspecialchars($event['loc']): 'No location assigned' ?></p>
             <p><strong>Description:</strong></p>
-            <p><?= $eventDescription ?></p>
+            <p><?=!empty($event['desc']) ? nl2br(htmlspecialchars($event['desc'])): 'No description' ?></p>
         </div>
-        <a href="events.php" style="text-decoration: none; color: #3b82f6;">&larr; Back to Events</a>
+        <a href="events.php" class="back-button">&larr; Back to Events</a>
+        <a href="edit.php?id=<?= $event['id'] ?>" class="my-button">
+            <i class="fas fa-edit"></i> Edit
+        </a>
+    
     </div>
-
-    <footer>
-        <p>&copy; Bounty Coders 2024. All rights reserved.</p>
-    </footer>
+    <!-- Add Edit Button with a container for alignment -->
+    
 </body>
 </html>

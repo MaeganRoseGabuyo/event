@@ -1,7 +1,33 @@
 <?php
 // Dashboard page PHP setup
-$title = 'Dashboard';
+include('database.php');
 include 'navbar.php';
+include 'footer.php';
+
+//Prepare a SELECT statement
+$stmt = $pdo->prepare(query: 'SELECT * FROM events');
+
+//Execute the statement
+$stmt->execute();
+
+//Fetch the result
+$events = $stmt->fetchAll();
+
+$activityStmt = $pdo->prepare('SELECT action_type, action_details, created_at FROM recent_activities ORDER BY created_at DESC LIMIT 4');
+$activityStmt->execute();
+$recentActivities = $activityStmt->fetchAll();
+
+// Optional: Delete older activities beyond the latest 100
+$deleteStmt = $pdo->prepare('DELETE FROM recent_activities WHERE id NOT IN (
+    SELECT id FROM (
+        SELECT id FROM recent_activities ORDER BY created_at DESC LIMIT 100
+    ) as temp
+)');
+$deleteStmt->execute();
+
+
+$title = 'Dashboard';
+
 ?>
 
 <!DOCTYPE html>
@@ -32,40 +58,6 @@ include 'navbar.php';
             padding: 20px;
             height: 100%;
             overflow: auto;
-        }
-
-        .sidebar .logo {
-            text-align: center;
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            color: #fff;
-        }
-
-        .sidebar ul {
-            padding: 0;
-            list-style-type: none;
-        }
-
-        .sidebar ul li {
-            margin-bottom: 20px;
-        }
-
-        .sidebar ul li a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 1.1rem;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            transition: 0.3s;
-        }
-
-        .sidebar ul li a:hover {
-            background-color: #3b82f6;
-        }
-
-        .sidebar ul li a i {
-            margin-right: 15px;
         }
 
         /* Main content styling */
@@ -128,24 +120,19 @@ include 'navbar.php';
             color: #555;
         }
 
-
+        footer {
+            background-color: #e69b00;
+            color: #fff;
+            padding: 2px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
     </style>
 </head>
 
 <body>
-<div class="navbar">
-        <div>
-            <img src="images/ylogo.png">
-        </div>
-        <ul>
-            <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li><a href="events.php"><i class="fas fa-calendar"></i> Events</a></li>
-            <li><a href="participants.php"><i class="fas fa-users"></i> Participants</a></li>
-            <li><a href="profile.php"><i class="fas fa-user"></i> Profile</a></li>
-            <li><a href="settings.php"><i class="fas fa-cogs"></i> Settings</a></li>
-        </ul>
-    </div>
-
     <div class="container">
         <!-- Welcome message -->
         <h1>Welcome to your BCEMS Dashboard!</h1>
@@ -153,7 +140,17 @@ include 'navbar.php';
         <!-- Stats section -->
         <div class="stats">
             <div class="stat-card">
-                <h2>20</h2>
+                <h2><?php
+                        $dash_totalEvents_query = "SELECT * FROM events";
+                        $dash_totalEvents_query_run = mysqli_query($con, $dash_totalEvents_query);
+                        if($totalEvents = mysqli_num_rows($dash_totalEvents_query_run))
+                        {
+                            echo $totalEvents;
+                        }
+                        else{
+                            echo '<p>No data<p/>';
+                        }  
+                        ?></td></h2>
                 <p>Total Events</p>
             </div>
             <div class="stat-card">
@@ -173,20 +170,15 @@ include 'navbar.php';
         <!-- Recent Activity Feed -->
         <div class="activity-feed">
             <h3>Recent Activities</h3>
-            <div class="activity-card">
-                <p><strong>Event Added:</strong> "The Soccer Showdown" added to the event list.</p>
-            </div>
-            <div class="activity-card">
-                <p><strong>New Participant:</strong> John Doe joined "The Soccer Showdown" event.</p>
-            </div>
-            <div class="activity-card">
-                <p><strong>Event Updated:</strong> "Race to Victory" details updated by Admin.</p>
-            </div>
+            <?php foreach ($recentActivities as $activity): ?>
+                <div class="activity-card">
+                    <strong><?= htmlspecialchars($activity['action_type']) ?>:</strong>
+                    <?= htmlspecialchars($activity['action_details']) ?>
+                    <small>(<?= date('F j, Y, g:i a', strtotime($activity['created_at'])) ?>)</small>
+                </div>
+                
+            <?php endforeach; ?>
         </div>
     </div>
-
-    <footer>
-    <p>&copy; Bounty Coders 2024. All rights reserved.</p>
-    </footer>
 </body>
 </html>

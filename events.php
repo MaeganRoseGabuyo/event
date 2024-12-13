@@ -14,16 +14,7 @@ $events = $stmt->fetchAll();
 
 // Your PHP variables remain unchanged
 $title = 'Events';
-
-$stmt = $pdo->prepare('SELECT year FROM events LIMIT 1');
-$stmt->execute();
-$result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-// Use the fetched year, or fallback to the current system year if not found
-$currentYear = $result['year'] ?? date("Y");
-
-// Dynamically set the page title
-$pageTitle5 = 'EVENTS ' . $currentYear;
+$pageTitle5 = 'EVENTS '.date("Y");
 ?>
 
 <!DOCTYPE html>
@@ -62,23 +53,22 @@ $pageTitle5 = 'EVENTS ' . $currentYear;
 
         .event-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 1rem;
             margin-top: 2rem;
             margin-bottom: 50px;
+          
         }
 
         .event-card {
-                background-color: #ffffff;
-                padding: 12px;
-                border-radius: 0.5rem;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                transition: transform 0.3s, box-shadow 0.3s;
-                text-align: center;
-                display: flex;  /* Use Flexbox */
-                flex-direction: column;  /* Stack items vertically */
-                justify-content: space-between;  /* Space between content and button */
-                
+            background-color: #ffffff;
+            padding: 12px;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            display: flex;  /* Use Flexbox */
+            flex-direction: column;  /* Stack items vertically */
          }
 
         .event-card a {
