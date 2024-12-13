@@ -1,7 +1,7 @@
 <?php
 include 'navbar.php';
-
 include('database.php');
+include 'footer.php';
 
 // Get the event ID from the query string
 $id = $_GET['id'] ?? null;
