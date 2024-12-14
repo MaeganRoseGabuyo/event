@@ -1,8 +1,21 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
+    header('Location: index.php');
+    exit();
+}
+
 // Dashboard page PHP setup
 include('database.php');
 include 'navbar.php';
 include 'footer.php';
+
+
+// Check if the user is logged in
+
+
+
 
 // Prepare a SELECT statement for events
 $stmt = $pdo->prepare('SELECT * FROM events');

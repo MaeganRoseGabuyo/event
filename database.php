@@ -1,11 +1,11 @@
 <?php 
 
 //Database configuration
-$host = '127.0.0.1';
+$host = 'sql311.infinityfree.com';
 $port = 3306;
-$dbName = 'finals';
-$username = 'root';
-$password = '';
+$dbName = 'if0_37913926_finals';
+$username = 'if0_37913926';
+$password = 'QDz0xS2yOJ';
 
 //conntection string
 $con = mysqli_connect($host,$username,$password,$dbName);
@@ -19,7 +19,7 @@ try {
     // set PDO to throw exceptions on error
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    /* echo "Database connnected....."; */
+    // echo "Database connnected....."; 
 
     // You are now connected to the database, and $pdo contains the connection object
 

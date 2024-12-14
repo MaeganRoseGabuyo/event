@@ -133,7 +133,7 @@ body::before {
     <button type="button" onclick="updatePassword()">Update Password</button>
 
     <div class="back-to-login">
-        <p>Remembered your password? <a href="login.php">Back to Login</a></p>
+        <p>Remembered your password? <a href="index.php">Back to Login</a></p>
     </div>
 </div>
 

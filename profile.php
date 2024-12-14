@@ -1,6 +1,34 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
+    header('Location: index.php');
+    exit();
+}
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 include 'navbar.php';
 include 'footer.php';
+include 'database.php';
+
+if (!isset($_SESSION['account_id'])) {
+    // Redirect to login page if not logged in
+    header('Location: login.php');
+    exit();
+}
+
+// Get the logged-in user's ID from the session
+$account_id = $_SESSION['account_id'];
+
+// Prepare the SQL query to fetch data for the logged-in user
+$sql = 'SELECT * FROM admin_accounts WHERE account_id = :account_id'; // Adjust table name as needed
+$stmt = $pdo->prepare($sql);
+$stmt->execute(['account_id' => $account_id]);
+
+// Fetch the results
+$user_data = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 
 
@@ -106,11 +134,10 @@ include 'footer.php';
         <!-- Profile Card (UI only, no database) -->
         <div class="profile-card">
             <img src="images/user.jpg" alt="User's Profile Picture" class="profile-img">
-            <h2>Paul Garren Santiago</h2>
-            <p>Email: falllyyy@example.com</p>
-            <p>Phone: +123456789</p>
-            <p><i><strong>Bio: Passionate about coding and event management.
-            Always looking for opportunities to improve my skills and collaborate with others.</strong></i></p>
+            <h2><?php echo htmlspecialchars($user_data['name']); ?></h2>
+            <p>Email: <?php echo htmlspecialchars($user_data['email']); ?></p>
+            <p>Phone: <?php echo htmlspecialchars($user_data['contact']); ?></p>
+            <p><i><strong>Bio: <?php echo htmlspecialchars($user_data['bio']); ?></strong></i></p>
 
             <!-- Edit Profile Button -->
             <a href="editprofile.php" class="edit-profile-btn">Edit Profile</a>

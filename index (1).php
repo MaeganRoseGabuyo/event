@@ -1,3 +1,84 @@
+<?php
+session_start();
+include('database.php');
+
+$error_message = ''; // Initialize an empty error message
+$username_value = isset($_COOKIE['username']) ? $_COOKIE['username'] : ''; // Check for cookie
+
+// Cleanup expired tokens by setting token_expiry to NULL
+$cleanup_sql = 'UPDATE admin_accounts SET token_expiry = NULL, auth_token = NULL WHERE token_expiry < NOW()';
+$cleanup_stmt = $pdo->prepare($cleanup_sql);
+$cleanup_stmt->execute();
+
+// Check if a valid token exists in the cookie for automatic login
+if (isset($_COOKIE['auth_token']) && !isset($_SESSION['loggedin'])) {
+    $auth_token = $_COOKIE['auth_token'];
+
+    // Query the database to find the token
+    $sql = 'SELECT * FROM admin_accounts WHERE auth_token = :auth_token';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['auth_token' => $auth_token]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        $_SESSION['loggedin'] = true;
+        $_SESSION['username'] = $user['username'];
+        
+        header('Location: loggedin.php');
+        exit();
+    } else {
+        echo "No matching user found for the provided token.<br>";
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $remember = isset($_POST['remember-me']); // Check if "Remember Me" is checked
+
+    $sql = 'SELECT * FROM admin_accounts WHERE username = :username';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['username' => $username]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user && password_verify($password, $user['password'])) {
+        $_SESSION['loggedin'] = true;
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['account_id'] = $user['account_id'];
+
+        if ($remember) {
+            $auth_token = bin2hex(random_bytes(32)); // Generate a secure token
+            $token_expiry = date('Y-m-d H:i:s', time() + (5 * 60));
+            
+            $update_sql = 'UPDATE admin_accounts SET auth_token = :auth_token, token_expiry = :token_expiry WHERE username = :username';
+            $update_stmt = $pdo->prepare($update_sql);
+            $update_stmt->execute([
+                'auth_token' => $auth_token,
+                'token_expiry' => $token_expiry,
+                'username' => $username
+            ]);
+
+            setcookie('auth_token', $auth_token, [
+                'expires' => time() + (5 * 60), // 5 minutes
+                'path' => '/',
+                'secure' => isset($_SERVER['HTTPS']), // Set true if using HTTPS
+                'httponly' => true,
+                'samesite' => 'Strict'
+            ]);
+        }
+
+        header('Location: dashboard.php');
+        exit();
+    } else {
+        $error_message = 'Invalid username/password';
+    }
+}
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -131,10 +212,10 @@
         <div class="login-container shadow">
             <img src="images/login.png" alt="Log In" class="user-image">
             <h1>Login</h1>
-            <form>
+            <form action="" method="post">
                 <div class="input-container">
                     <i class="fas fa-user icon left-icon"></i>
-                    <input type="text" name="username" id="username" placeholder="Username" required>
+                    <input type="text" name="username" id="username" placeholder="Username" value="<?php echo htmlspecialchars($username_value); ?>" required>
                 </div>
 
                 <div class="input-container">
@@ -144,11 +225,17 @@
                 </div>
 
                 <div class="remember-me">
-                    <input type="checkbox" id="remember-me">
+                    <input type="checkbox" id="remember-me" name="remember-me">
                     <label for="remember-me">Remember Me</label>
                 </div>
 
-                <button type="button" onclick="window.location.href='dashboard.php';">Login</button>
+                <?php if (!empty($error_message)): ?>
+                    <div class="alert alert-danger" style="color: red; margin: 15px;">
+                        <?php echo $error_message; ?>
+                    </div>
+                <?php endif; ?>
+
+                <button type="submit" name="submit">Login</button>
 
                 <div class="additional-options mt-3">
                     <a href="forgetpass.php">Forgot Password?</a>
