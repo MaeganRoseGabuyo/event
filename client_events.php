@@ -20,7 +20,7 @@ $stmt->execute();
 // Fetch the result
 $events = $stmt->fetchAll();
 // Your PHP variables remain unchanged
-$title = 'Events';
+
 $pageTitle5 = 'EVENTS '.date("Y");
 
 
@@ -30,6 +30,11 @@ $pageTitle5 = 'EVENTS '.date("Y");
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <!-- Add font-awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -135,13 +140,6 @@ $pageTitle5 = 'EVENTS '.date("Y");
             background-color:rgb(235, 193, 104);
         }
     </style>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title ?></title>
-    <!-- Add font-awesome for icons -->
-   
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
