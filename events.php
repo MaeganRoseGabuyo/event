@@ -45,7 +45,7 @@ $pageTitle5 = 'EVENTS '.date("Y");
             flex: 1; /* Allow the container to take remaining space */
             justify-items: center;
             padding: 50px; /* Reduced padding for closer top alignment */
-            margin-bottom: 0px;
+            margin-bottom: 20px;
             margin-top: 0;
         }
 
@@ -113,7 +113,7 @@ $pageTitle5 = 'EVENTS '.date("Y");
      <!-- Main Content -->
     <div class="container">
         <h1 class="main-title"><?= $pageTitle5 ?></h1>
-    </div>
+    
     
         <!-- Category Filter Dropdown -->
         <form method="GET" class="category-form">
