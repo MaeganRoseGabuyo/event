@@ -37,16 +37,15 @@ $pageTitle5 = 'EVENTS '.date("Y");
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column; /* Stack content vertically */
-            min-height: 10vh; /* Ensure the body fills the viewport */
+            min-height: 100vh;
         }
 
         .container {
-            flex: 1; /* Allow the container to take remaining space */
-            justify-items: center;
-            padding: 50px; /* Reduced padding for closer top alignment */
-            margin-bottom: 20px;
-            margin-top: 0;
+            flex: 1;
+            flex-direction: column;
+            padding: 20px;
+            height: 100%;
+            overflow: auto;
         }
 
         .main-title {
@@ -54,7 +53,7 @@ $pageTitle5 = 'EVENTS '.date("Y");
             font-size: 3rem;
             color: #e6b400;
             font-weight: 600;
-            margin-top: 0;
+            margin-top: 1rem;
         }
 
         .event-grid {
@@ -62,6 +61,8 @@ $pageTitle5 = 'EVENTS '.date("Y");
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 1rem;
             margin-top: 2rem;
+            margin-bottom: 50px;
+          
         }
 
         .event-card {
@@ -71,20 +72,54 @@ $pageTitle5 = 'EVENTS '.date("Y");
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s, box-shadow 0.3s;
             text-align: center;
+            display: flex;  /* Use Flexbox */
+            flex-direction: column;  /* Stack items vertically */
+         }
+
+        .event-card a {
+                text-decoration: none;
+                color: #e6b400;
         }
 
         .event-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15);
+                transform: translateY(-5px);
+                box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15);
         }
 
         .event-card img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-radius: 0.5rem;
+                width: 100%;
+                height: 300px;
+                object-fit: cover;
+                border-radius: 8px;
+                margin-bottom: 1rem;
+         }
+
+        .my-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
-        
+
+        .my-button:hover {
+            background-color: #9bbcff;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between; /* Space between the two buttons */
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .category-form {
+            margin: 0; /* Remove default margin for the form */
+        }
+
         .my-button.dropdown {
             background-color:rgb(241, 135, 15); /* Style for the dropdown button */
             color: white;
@@ -127,9 +162,9 @@ $pageTitle5 = 'EVENTS '.date("Y");
         <div class="event-grid">
             <?php foreach($events as $event): ?>
                 <div class="event-card">
-                    <a href="fullevent.php?id=<?= $event['id'] ?>">
+                    <a href="client_fullevent.php?id=<?= $event['id'] ?>">
                         <h3><?= $event['event'] ?></h3>
-                        <img src="<?= $event['grid_image'] ?>" alt="image">
+                        <img src="<?=$event['grid_image']?>" alt="image">
                     </a>
                 </div>
             <?php endforeach; ?>

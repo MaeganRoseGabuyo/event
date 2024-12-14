@@ -126,7 +126,7 @@
         <h1>BOUNTY CODERS</h1>
     </div>
 
-    <button type="button" onclick="window.location.href='events.php';">Proceed</button>
+    <button type="button" onclick="window.location.href='client_events.php';">Proceed</button>
 
     <!-- Footer moved inside the body -->
     <footer>
